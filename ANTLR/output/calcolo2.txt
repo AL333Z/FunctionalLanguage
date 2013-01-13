@@ -1,0 +1,22 @@
+/* INTRODURRE la dichiarazione di funzioni */
+
+def sommatoria(n) =
+  if (n == 0) then 0
+  else n+sommatoria(n-1);
+
+def fibonacci(n) =
+  if (n == 0) then 1
+  else if (n == 1) then 1
+       else fib(n-1)+fib(n-2);
+
+def mult(a,b) =
+  if (a == 0) then b
+  else a+mult(a-1,b);
+
+def fattoriale(n) =
+  if (a == 0) then 1
+  else mult(n,fattoriale(n-1));
+
+print sommatoria(5);
+print fibonacci(5);
+print fattoriale(5);

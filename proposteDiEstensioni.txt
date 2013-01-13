@@ -1,0 +1,29 @@
+Possibili estensioni del linguaggio:
+
+--------------------------------------
+1- Rendere il linguaggio higher-order:
+--------------------------------------
+Passare le funzioni come parametri.
+Vedi, come esempio, il file "higher_order.fl"
+[SUGGERIMENTO: rappresentare funzioni come numeri
+ CONTROLLATE SE E' NECESSARIO ESTENDERE LA VM]
+
+-----------------------------------
+2- Realizzazione di un type checker
+-----------------------------------
+del tipo degli identificatori.
+Considerare i tipi:
+INT
+BOOL
+LIST-OF[X] (dove X e' il tipo degli elementi nella lista)
+X1, X2,.., Xn --> Y (per le funzioni, dove Xi sono i tipi
+degli argomenti e Y e' il tipo del valore di ritorno)
+
+-----------------------
+3- Dichiarazioni locali 
+-----------------------
+Permettere la dichiarazione di variabili e funzioni anche localmente.
+Questo richiede di introdurre nozioni non banali di scoping.
+Adottare la regola standard di scoping statico, implementando quindi
+negli activation record anche i cosiddetti "access link".
+[NON CONSIDERARE LA POSSIBILITA' DI PASSARE FUNZIONI COME PARAMETRI]

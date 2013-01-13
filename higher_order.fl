@@ -1,0 +1,64 @@
+/* check if a list is empty */
+def vuota(l)
+  if (l == empty) 
+    then true 
+    else false;
+
+/* insertion in an ordered list */
+def inserisci(l,n)
+  if (vuota(l)) 
+    then list(n,empty)
+    else if (n < first(l)) 
+           then list(n,l)
+           else list(first(l),inserisci(rest(l),n));
+
+/* print list content */
+def stampa(l)
+  if (vuota(l)) 
+    then 0
+    else {print(first(l));
+          stampa(rest(l))};
+
+/* insertion sort */
+def sort(l)
+  if (vuota(l)) 
+    then empty
+    else inserisci(sort(rest(l)),first(l));
+
+/* filter a list by applying a condition that requires the pivot */
+def filtra(l,cond,pivot) 
+  if (l == empty) 
+    then empty
+    else if ( cond(first(l),pivot) ) 
+           then list(first(l),filtra(rest(l),cond,pivot))
+           else filtra(rest(l),cond,pivot);
+
+/* append two lists */
+def append(l1,l2) 
+  if (l1 == empty) 
+    then l2
+    else list(first(l1),append(rest(l1),l2));
+
+/* check if n1 is less than n2 */
+def minori(n1,n2)
+  (n1 < n2); 
+
+/* check if n1 is greater than n2 */
+def maggiori(n1,n2) 
+  (n1 > n2);
+
+/* quicksort */
+def quicksort(l) 
+  if (l == empty) 
+    then empty
+    else append( quicksort( filtra(l,minori,first(l)) ),
+                 append ( list(first(l),empty), 
+                          quicksort( filtra(l,maggiori,first(l))) ) 
+               );
+
+/* two list examples */
+def lista = list(7,list(3,list(5,empty)));
+def lista2 = list(8,list(6,empty));
+
+/* test of quicksort */
+stampa(quicksort(append(lista,lista2)));

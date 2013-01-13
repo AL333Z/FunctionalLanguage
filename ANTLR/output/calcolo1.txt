@@ -1,0 +1,5 @@
+def sommatutti(l) = 
+ if (l==empty) then 0
+               else (l.first)+sommatutti( (l.rest) );  
+
+print sommatutti([5,[3,empty]]);

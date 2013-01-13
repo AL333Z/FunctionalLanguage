@@ -1,0 +1,12 @@
+/* INTRODURRE:
+   volori booleani TRUE e FALSE
+   espressione ( exp == exp )
+   expression if exp then exp else exp */
+
+def j = 9;                  /* j = 9 */
+def i = j + (3 - (3 * 2));  /* i = 6 */
+
+print 
+  if (j+2 == i-1) 
+    then 100
+    else 200;
