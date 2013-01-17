@@ -7,7 +7,7 @@ class Test {
 
     public static void main(String[] args) throws Exception {
       
-        FunctionalLanguageLexer lex = new FunctionalLanguageLexer(new ANTLRFileStream(args[0]));
+        FunctionalLanguageLexer lex = new FunctionalLanguageLexer(new ANTLRFileStream("bin/"+args[0]));
         CommonTokenStream tokens = new CommonTokenStream(lex);
         FunctionalLanguageParser parser = new FunctionalLanguageParser(tokens);
         

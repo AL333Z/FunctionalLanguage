@@ -1,5 +1,12 @@
-def sommatutti(l) = 
+/*def sommatutti(l) = 
  if (l==empty) then 0
                else (l.first)+sommatutti( (l.rest) );  
 
 print sommatutti([5,[3,empty]]);
+*/
+
+def INT pippo = (5-3+2+3);
+print pippo;
+
+def BOOL state = true;
+def BOOL state2 = false;
