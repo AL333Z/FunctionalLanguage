@@ -1,6 +1,11 @@
 
 import org.antlr.runtime.*;
+
+import com.al333z.typechecking.Checker;
+import com.al333z.typechecking.CommandChecker;
+
 import java.io.*;
+import java.util.LinkedList;
 
 
 class Test {
@@ -11,9 +16,19 @@ class Test {
         CommonTokenStream tokens = new CommonTokenStream(lex);
         FunctionalLanguageParser parser = new FunctionalLanguageParser(tokens);
         
+        /*
+        String code = parser.prog().code;
+        System.out.println("Code: "+code);
+        
         FileWriter fstream = new FileWriter(args[0]+".asm");
-        fstream.write(parser.prog());
+        fstream.write(code);
         fstream.close();
+        */
+        
+        LinkedList<Checker> checkerList = parser.prog().typecheckerlist;
+        CommandChecker firstCommandChecker = (CommandChecker) checkerList.get(0);
+        firstCommandChecker.check();
+        
         
         StackVirtualMachineLexer lex2 = new StackVirtualMachineLexer(new ANTLRFileStream(args[0]+".asm"));
         CommonTokenStream tokens2 = new CommonTokenStream(lex2);

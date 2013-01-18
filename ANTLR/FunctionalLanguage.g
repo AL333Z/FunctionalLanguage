@@ -3,6 +3,7 @@ grammar FunctionalLanguage;
 @header {
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import com.al333z.typechecking.*;
 
 }
@@ -24,23 +25,46 @@ private String functionCode = new String();
 
 // parser
 
-prog	returns [String code]
-        	: c=command SEMIC {$code = $c.code+"\n";}
-	 (d=command SEMIC {$code += $d.code+"\n";} )* 	{ $code+="\thalt\n"+functionCode;}
+//TODO
+prog	returns [String code,  LinkedList<Checker> typecheckerlist]
+        	: c=command SEMIC 
+        	{
+        	
+        	$code = $c.code+"\n";
+        	$typecheckerlist = new LinkedList<Checker>();
+	$typecheckerlist.add(new CommandChecker($c.typecheck));
+        	
+        	}
+        	
+	 (d=command SEMIC 
+	 {
+	 
+	 $code += $d.code+"\n";
+	 
+	$typecheckerlist.add(new CommandChecker($d.typecheck));
+	 
+	 } )* 	{ $code+="\thalt\n"+functionCode;}
  	;
  	
- 	//TODO syntax directed translation...
-type
-	: INT
-	| BOOL
-	| (LISTOF LSPAR type RSPAR)
-	; 	
+type returns [int typevalue]
+	: INT	{$typevalue = 100; }
+	| BOOL {$typevalue = 101; }
+	| (LISTOF LSPAR type RSPAR) {$typevalue = 102; }
+	;
+		 	
  	  
-command	returns [String code]
-	: DEF type i=ID 		//TODO
-          	( ASS e=expr {
+command	returns [String code, Checker typecheck]
+	: DEF t=type i=ID
+          	( ASS e=expr 
+          	{
+          	
             symTable.put($i.text,new Integer(staticData));
-            $code = $e.code+"\tpush "+(staticData++)+"\n"+"\tsw\n";}
+            $code = $e.code+"\tpush "+(staticData++)+"\n"+"\tsw\n";
+            
+            $typecheck = new ExprAssignmentChecker($t.typevalue , $e.typecheck);
+            
+            }
+            
            	|LPAR ( 
            	type	//TODO
             j=ID 
@@ -68,14 +92,44 @@ command	returns [String code]
             localSymTable=new HashMap();             
          	} 
           	) 
-        	| PRINT e=expr {$code = $e.code+"\tprint\n";} 	  
+        	| PRINT e=expr 
+        	
+        	{
+        	
+        	$code = $e.code+"\tprint\n";
+        
+        	//TODO PrintChecker instead of expr..
+        	$typecheck = new ExprChecker($e.typecheck);
+        	
+        	} 	  
         	;
         
-expr	returns [String code]
-	: t=term {$code = $t.code;}
-          	( PLUS t=term {$code+=$t.code+"\tadd\n";}
-          	| MINUS t=term {$code=$t.code+$code+"\tsub\n";}
-          	| OR t=term 
+expr	returns [String code, Checker typecheck]
+	: t=term
+	{
+	
+	$code = $t.code;
+	$typecheck = new TermChecker($t.typecheck);
+	
+	}	
+	
+          	( PLUS t2=term 
+          	{
+          	
+          	$code+=$t2.code+"\tadd\n";
+          	$typecheck = new PlusChecker($t.typecheck, $t2.typecheck);
+          	
+          	}
+          	
+          	
+          	| MINUS t2=term 
+          	{
+          	
+          	$code=$t2.code+$code+"\tsub\n";
+          	$typecheck = new MinusChecker($t.typecheck, $t2.typecheck);
+          	
+          	}
+          	| OR t2=term 
             {
             $code = $code+
             	     "\tpush "+TRUEVALUE+"\n"+
@@ -88,18 +142,26 @@ expr	returns [String code]
             	     "label"+(labelCounter-2)+":\n"+
             	     "\tpush "+TRUEVALUE+"\n"+
             	     "label"+(labelCounter-1)+":\n";
+            	     
+        	$typecheck = new OrChecker($t.typecheck, $t2.typecheck);    	    
+            	    
        	}
           	)*  
         	;
                         
-term  	returns [String code]
-        	: f=factor {$code=$f.code;} 
-          	(AND f=factor
+term  	returns [String code, Checker typecheck]
+        	: f=factor 
+        	{
+        	$code=$f.code;
+        	$typecheck = new FactorChecker($f.typecheck);
+        	
+        	} 
+          	(AND f2=factor
            	{
            	$code = $code+
             	        "\tpush "+FALSEVALUE+"\n"+
             	        "\tbeq label"+labelCounter+"\n"+
-            	        $f.code+
+            	        $f2.code+
             	        "\tpush "+FALSEVALUE+"\n"+
             	        "\tbeq label"+(labelCounter++)+"\n"+
             	        "\tpush "+TRUEVALUE+"\n"+
@@ -107,15 +169,18 @@ term  	returns [String code]
             	        "label"+(labelCounter-2)+":\n"+
             	        "\tpush "+FALSEVALUE+"\n"+
             	        "label"+(labelCounter-1)+":\n";
+            	        
+       	$typecheck = new AndChecker($f.typecheck, $f2.typecheck);	
+            	        
        	}
           	)*
 	;
 
-factor 	returns [String code, Checker typeCheck]					//TODO type checking starts here!!
- 	: n=NUMBER {$code = "\tpush "+$n.text+"\n"; $typeCheck = new NumberChecker(); }
- 	| TRUE {$code = "\tpush "+TRUEVALUE+"\n"; $typeCheck = new BoolChecker(); }
- 	| FALSE {$code = "\tpush "+FALSEVALUE+"\n"; $typeCheck = new BoolChecker(); }
- 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $typeCheck = new ListChecker(); }
+factor 	returns [String code, Checker typecheck]
+ 	: n=NUMBER {$code = "\tpush "+$n.text+"\n"; $typecheck = new NumberChecker(); }
+ 	| TRUE {$code = "\tpush "+TRUEVALUE+"\n"; $typecheck = new BoolChecker(); }
+ 	| FALSE {$code = "\tpush "+FALSEVALUE+"\n"; $typecheck = new BoolChecker(); }
+ 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $typecheck = new ListChecker(); }
  	| NOT e=expr
  	{
  	$code = $e.code+
@@ -126,7 +191,9 @@ factor 	returns [String code, Checker typeCheck]					//TODO type checking starts
             	   "label"+(labelCounter-2)+":\n"+
             	   "\tpush "+FALSEVALUE+"\n"+
             	   "label"+(labelCounter-1)+":\n";
-   
+            	   
+        	$typecheck = new NotChecker($e.typecheck);
+        	
          	}
         	| LSPAR e=expr COMMA f=expr RSPAR
           	{
@@ -143,6 +210,9 @@ factor 	returns [String code, Checker typeCheck]					//TODO type checking starts
                    "\tpush 2\n"+
                    "\tadd\n"+
                    "\tshp\n";
+                   
+                   //TODO
+                   
       	}
         	| i=ID 
           	( 
@@ -175,6 +245,9 @@ factor 	returns [String code, Checker typeCheck]					//TODO type checking starts
           	   "label"+(labelCounter-2)+":\n"+
           	   "\tpush "+TRUEVALUE+"\n"+
           	   "label"+(labelCounter-1)+":\n";
+          	   
+        	$typecheck = new EqualChecker($e.typecheck, $e2.typecheck);
+        	
          	}
           	| LESS e2=expr RPAR 
             {
@@ -185,6 +258,9 @@ factor 	returns [String code, Checker typeCheck]					//TODO type checking starts
           	   "label"+(labelCounter-2)+":\n"+
           	   "\tpush "+TRUEVALUE+"\n"+
           	   "label"+(labelCounter-1)+":\n";
+          
+       	$typecheck = new LessChecker($e.typecheck, $e2.typecheck);
+       	
         	}   
          	 | GREATER e2=expr RPAR 
            	{
@@ -195,6 +271,9 @@ factor 	returns [String code, Checker typeCheck]					//TODO type checking starts
           	   "label"+(labelCounter-2)+":\n"+
           	   "\tpush "+TRUEVALUE+"\n"+
           	   "label"+(labelCounter-1)+":\n";
+          	   
+        	$typecheck = new GreaterChecker($e.typecheck, $e2.typecheck);
+          	   
        	}    
         	| DOT 
             ( FIRST {$code = $e.code+"\tlw\n";} 
