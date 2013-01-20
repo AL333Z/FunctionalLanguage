@@ -14,6 +14,7 @@ private int staticData = 0;
 private int labelCounter = 0;
 private int parameterCounter = 0;
 private HashMap symTable = new HashMap();
+private HashMap typeTable = new HashMap();
 private HashMap localSymTable = new HashMap();
 private final static int TRUEVALUE = 1;
 private final static int FALSEVALUE = 0;
@@ -26,13 +27,12 @@ private String functionCode = new String();
 // parser
 
 //TODO
-prog	returns [String code,  LinkedList<Checker> typecheckerlist]
+prog	returns [String code,  Checker typecheck]
         	: c=command SEMIC 
         	{
         	
         	$code = $c.code+"\n";
-        	$typecheckerlist = new LinkedList<Checker>();
-	$typecheckerlist.add(new CommandChecker($c.typecheck));
+	$typecheck = new CommandChecker($c.typecheck);
         	
         	}
         	
@@ -41,15 +41,15 @@ prog	returns [String code,  LinkedList<Checker> typecheckerlist]
 	 
 	 $code += $d.code+"\n";
 	 
-	$typecheckerlist.add(new CommandChecker($d.typecheck));
+	$typecheck = new ProgramChecker($typecheck, $d.typecheck);
 	 
 	 } )* 	{ $code+="\thalt\n"+functionCode;}
  	;
  	
 type returns [int typevalue]
-	: INT	{$typevalue = 100; }
-	| BOOL {$typevalue = 101; }
-	| (LISTOF LSPAR type RSPAR) {$typevalue = 102; }
+	: INT	{$typevalue = Checker.INT; }
+	| BOOL {$typevalue = Checker.BOOL; }
+	| (LISTOF LSPAR type RSPAR) {$typevalue = Checker.LISTOF; }
 	;
 		 	
  	  
@@ -59,6 +59,7 @@ command	returns [String code, Checker typecheck]
           	{
           	
             symTable.put($i.text,new Integer(staticData));
+            typeTable.put($i.text,new Integer($t.typevalue));
             $code = $e.code+"\tpush "+(staticData++)+"\n"+"\tsw\n";
             
             $typecheck = new ExprAssignmentChecker($t.typevalue , $e.typecheck);
@@ -97,9 +98,8 @@ command	returns [String code, Checker typecheck]
         	{
         	
         	$code = $e.code+"\tprint\n";
-        
-        	//TODO PrintChecker instead of expr..
-        	$typecheck = new ExprChecker($e.typecheck);
+        	
+        	$typecheck = new PrintChecker($e.typecheck);
         	
         	} 	  
         	;
@@ -117,7 +117,7 @@ expr	returns [String code, Checker typecheck]
           	{
           	
           	$code+=$t2.code+"\tadd\n";
-          	$typecheck = new PlusChecker($t.typecheck, $t2.typecheck);
+          	$typecheck = new PlusChecker($typecheck, $t2.typecheck);
           	
           	}
           	
@@ -126,7 +126,7 @@ expr	returns [String code, Checker typecheck]
           	{
           	
           	$code=$t2.code+$code+"\tsub\n";
-          	$typecheck = new MinusChecker($t.typecheck, $t2.typecheck);
+          	$typecheck = new MinusChecker($typecheck, $t2.typecheck);
           	
           	}
           	| OR t2=term 
@@ -143,7 +143,7 @@ expr	returns [String code, Checker typecheck]
             	     "\tpush "+TRUEVALUE+"\n"+
             	     "label"+(labelCounter-1)+":\n";
             	     
-        	$typecheck = new OrChecker($t.typecheck, $t2.typecheck);    	    
+        	$typecheck = new OrChecker($typecheck, $t2.typecheck);    	    
             	    
        	}
           	)*  
@@ -169,8 +169,8 @@ term  	returns [String code, Checker typecheck]
             	        "label"+(labelCounter-2)+":\n"+
             	        "\tpush "+FALSEVALUE+"\n"+
             	        "label"+(labelCounter-1)+":\n";
-            	        
-       	$typecheck = new AndChecker($f.typecheck, $f2.typecheck);	
+            //TODO wrong implementation	        
+       	$typecheck = new AndChecker($typecheck, $f2.typecheck);	
             	        
        	}
           	)*
@@ -228,6 +228,14 @@ factor 	returns [String code, Checker typecheck]
                         "\tadd\n"+
                         "\tlw\n";
        	}
+       	
+       	Integer typeValue = (Integer)typeTable.get($i.text);
+            if (typeValue == null) {
+         		$typecheck = new ErrorChecker();
+            } else {
+		$typecheck = new IdChecker(typeValue.intValue());
+       	}
+       	
             }
           	| LPAR {$code = "";}
           	  (e=expr {$code = $e.code;}
