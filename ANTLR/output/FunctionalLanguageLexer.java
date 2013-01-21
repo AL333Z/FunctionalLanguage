@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-20 15:53:57
+// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-21 18:33:38
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -62,8 +62,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = PLUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:312:10: ( '+' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:312:12: '+'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:403:10: ( '+' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:403:12: '+'
             {
             match('+'); 
 
@@ -83,8 +83,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = MINUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:313:10: ( '-' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:313:12: '-'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:404:10: ( '-' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:404:12: '-'
             {
             match('-'); 
 
@@ -104,8 +104,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = LPAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:314:10: ( '(' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:314:12: '('
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:405:10: ( '(' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:405:12: '('
             {
             match('('); 
 
@@ -125,8 +125,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = RPAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:315:7: ( ')' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:315:9: ')'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:406:7: ( ')' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:406:9: ')'
             {
             match(')'); 
 
@@ -146,8 +146,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = LSPAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:316:10: ( '[' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:316:12: '['
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:407:10: ( '[' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:407:12: '['
             {
             match('['); 
 
@@ -167,8 +167,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = RSPAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:317:7: ( ']' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:317:9: ']'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:408:7: ( ']' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:408:9: ']'
             {
             match(']'); 
 
@@ -188,8 +188,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = SEMIC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:318:10: ( ';' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:318:12: ';'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:409:10: ( ';' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:409:12: ';'
             {
             match(';'); 
 
@@ -209,8 +209,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:319:10: ( ',' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:319:12: ','
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:410:10: ( ',' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:410:12: ','
             {
             match(','); 
 
@@ -230,8 +230,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:320:6: ( '.' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:320:8: '.'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:411:6: ( '.' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:411:8: '.'
             {
             match('.'); 
 
@@ -251,8 +251,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = DEF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:321:11: ( 'def' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:321:13: 'def'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:412:11: ( 'def' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:412:13: 'def'
             {
             match("def"); 
 
@@ -274,8 +274,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = ASS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:322:10: ( '=' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:322:12: '='
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:413:10: ( '=' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:413:12: '='
             {
             match('='); 
 
@@ -295,8 +295,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:323:7: ( '==' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:323:9: '=='
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:414:7: ( '==' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:414:9: '=='
             {
             match("=="); 
 
@@ -318,8 +318,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = LESS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:324:7: ( '<' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:324:9: '<'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:415:7: ( '<' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:415:9: '<'
             {
             match('<'); 
 
@@ -339,8 +339,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = GREATER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:325:9: ( '>' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:325:11: '>'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:416:9: ( '>' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:416:11: '>'
             {
             match('>'); 
 
@@ -360,8 +360,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:326:5: ( '||' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:326:7: '||'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:417:5: ( '||' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:417:7: '||'
             {
             match("||"); 
 
@@ -383,8 +383,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:327:6: ( '&&' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:327:8: '&&'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:418:6: ( '&&' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:418:8: '&&'
             {
             match("&&"); 
 
@@ -406,8 +406,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = NOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:328:6: ( '!' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:328:8: '!'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:419:6: ( '!' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:419:8: '!'
             {
             match('!'); 
 
@@ -427,8 +427,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = PRINT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:329:9: ( 'print' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:329:11: 'print'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:420:9: ( 'print' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:420:11: 'print'
             {
             match("print"); 
 
@@ -450,8 +450,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = IF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:330:5: ( 'if' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:330:7: 'if'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:421:5: ( 'if' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:421:7: 'if'
             {
             match("if"); 
 
@@ -473,8 +473,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = THEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:331:7: ( 'then' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:331:9: 'then'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:422:7: ( 'then' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:422:9: 'then'
             {
             match("then"); 
 
@@ -496,8 +496,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = ELSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:332:7: ( 'else' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:332:9: 'else'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:423:7: ( 'else' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:423:9: 'else'
             {
             match("else"); 
 
@@ -519,8 +519,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:333:7: ( 'true' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:333:9: 'true'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:424:7: ( 'true' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:424:9: 'true'
             {
             match("true"); 
 
@@ -542,8 +542,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:334:8: ( 'false' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:334:10: 'false'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:425:8: ( 'false' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:425:10: 'false'
             {
             match("false"); 
 
@@ -565,8 +565,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = EMPTY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:335:8: ( 'empty' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:335:10: 'empty'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:426:8: ( 'empty' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:426:10: 'empty'
             {
             match("empty"); 
 
@@ -588,8 +588,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = FIRST;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:336:8: ( 'first' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:336:10: 'first'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:427:8: ( 'first' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:427:10: 'first'
             {
             match("first"); 
 
@@ -611,8 +611,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = REST;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:337:7: ( 'rest' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:337:9: 'rest'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:428:7: ( 'rest' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:428:9: 'rest'
             {
             match("rest"); 
 
@@ -634,8 +634,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:338:7: ( 'INT' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:338:9: 'INT'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:429:7: ( 'INT' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:429:9: 'INT'
             {
             match("INT"); 
 
@@ -657,8 +657,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = BOOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:339:7: ( 'BOOL' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:339:10: 'BOOL'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:430:7: ( 'BOOL' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:430:10: 'BOOL'
             {
             match("BOOL"); 
 
@@ -680,8 +680,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = LISTOF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:340:9: ( 'LIST-OF' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:340:11: 'LIST-OF'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:431:9: ( 'LIST-OF' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:431:11: 'LIST-OF'
             {
             match("LIST-OF"); 
 
@@ -703,7 +703,7 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = NUMBER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:341:10: ( '0' | ( ( '1' .. '9' ) ( '0' .. '9' )* ) )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:432:10: ( '0' | ( ( '1' .. '9' ) ( '0' .. '9' )* ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -722,17 +722,17 @@ public class FunctionalLanguageLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:341:12: '0'
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:432:12: '0'
                     {
                     match('0'); 
 
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:341:18: ( ( '1' .. '9' ) ( '0' .. '9' )* )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:432:18: ( ( '1' .. '9' ) ( '0' .. '9' )* )
                     {
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:341:18: ( ( '1' .. '9' ) ( '0' .. '9' )* )
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:341:19: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:432:18: ( ( '1' .. '9' ) ( '0' .. '9' )* )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:432:19: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
                     if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
                         input.consume();
@@ -744,7 +744,7 @@ public class FunctionalLanguageLexer extends Lexer {
                     }
 
 
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:341:29: ( '0' .. '9' )*
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:432:29: ( '0' .. '9' )*
                     loop1:
                     do {
                         int alt1=2;
@@ -799,8 +799,8 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:342:5: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )* )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:342:7: ( 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:433:5: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )* )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:433:7: ( 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -812,7 +812,7 @@ public class FunctionalLanguageLexer extends Lexer {
             }
 
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:342:28: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:433:28: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' )*
             loop3:
             do {
                 int alt3=2;
@@ -862,10 +862,10 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = WHITESP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:343:10: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:343:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:434:10: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:434:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
             {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:343:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:434:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
             int cnt4=0;
             loop4:
             do {
@@ -922,14 +922,14 @@ public class FunctionalLanguageLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:344:10: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:344:12: '/*' ( options {greedy=false; } : . )* '*/'
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:435:10: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:435:12: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
 
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:344:17: ( options {greedy=false; } : . )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:435:17: ( options {greedy=false; } : . )*
             loop5:
             do {
                 int alt5=2;
@@ -954,7 +954,7 @@ public class FunctionalLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:344:44: .
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:435:44: .
             	    {
             	    matchAny(); 
 

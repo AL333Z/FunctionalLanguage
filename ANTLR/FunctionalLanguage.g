@@ -16,6 +16,14 @@ private int parameterCounter = 0;
 private HashMap symTable = new HashMap();
 private HashMap typeTable = new HashMap();
 private HashMap localSymTable = new HashMap();
+private HashMap localTypeTable = new HashMap();
+
+private HashMap functionParametersTypeTable = new HashMap();
+private HashMap functionReturnValues = new HashMap();
+
+private LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
+private LinkedList<Integer> parametersTypeList = new LinkedList<Integer>();
+
 private final static int TRUEVALUE = 1;
 private final static int FALSEVALUE = 0;
 private final static int EMPTYVALUE = -1;
@@ -26,7 +34,6 @@ private String functionCode = new String();
 
 // parser
 
-//TODO
 prog	returns [String code,  Checker typecheck]
         	: c=command SEMIC 
         	{
@@ -67,17 +74,50 @@ command	returns [String code, Checker typecheck]
             }
             
            	|LPAR ( 
-           	type	//TODO
+           	{
+           	
+           	// save func return values
+           	functionReturnValues.put($i.text, new Integer($t.typevalue));
+           	
+           	}
+           	
+           	t=type
             j=ID 
-            {localSymTable.put($j.text,new Integer(parameterCounter++));}
-            (COMMA type j=ID 	//TODO
-            {localSymTable.put($j.text,new Integer(parameterCounter++));} 
-            )* )? RPAR ASS e=expr
+            {
+            localSymTable.put($j.text,new Integer(parameterCounter++));
+            //TODO
+            localTypeTable.put($j.text,new Integer($t.typevalue));
+            
+            //  save first param type
+       	parametersTypeList.add(new Integer($t.typevalue));
+            
+            }
+            (COMMA t=type k=ID
+            {
+            localSymTable.put($k.text,new Integer(parameterCounter++));
+            //TODO
+            localTypeTable.put($k.text,new Integer($t.typevalue));
+            
+       	parametersTypeList.add(new Integer($t.typevalue));
+            
+            } 
+            )* )? RPAR
+            {
+            	// save parameters type list
+            	functionParametersTypeTable.put($i.text, parametersTypeList);
+            	
+            	System.out.println("saved functionParametersTypeTable id: "+$i.text);
+            	System.out.println("saved functionParametersTypeTable size: "+parametersTypeList.size());
+            	System.out.println("saved functionParametersTypeTable: "+parametersTypeList.toString());
+            	
+            	parametersTypeList = new LinkedList<Integer>();
+            }
+             ASS e=expr
             {
             String removePar = "";
             for(int c=0; c<parameterCounter; c++)
             	removePar+="\tpop\n";
-             functionCode+=$i.text+":\n"+
+         	functionCode+=$i.text+":\n"+
                             "\tlsp\n"+
                             "\tsfp\n"+
                             "\tlra\n"+
@@ -90,7 +130,13 @@ command	returns [String code, Checker typecheck]
                             "\tjra\n";
        	$code="";
             parameterCounter=0;
-            localSymTable=new HashMap();             
+            localSymTable=new HashMap();
+            
+                        //TODO
+            localTypeTable = new HashMap();
+            
+            $typecheck = new ExprChecker($e.typecheck);
+                       
          	} 
           	) 
         	| PRINT e=expr 
@@ -169,7 +215,7 @@ term  	returns [String code, Checker typecheck]
             	        "label"+(labelCounter-2)+":\n"+
             	        "\tpush "+FALSEVALUE+"\n"+
             	        "label"+(labelCounter-1)+":\n";
-            //TODO wrong implementation	        
+	        
        	$typecheck = new AndChecker($typecheck, $f2.typecheck);	
             	        
        	}
@@ -229,18 +275,60 @@ factor 	returns [String code, Checker typecheck]
                         "\tlw\n";
        	}
        	
-       	Integer typeValue = (Integer)typeTable.get($i.text);
-            if (typeValue == null) {
-         		$typecheck = new ErrorChecker();
+       	Integer localTypeValue = (Integer)localTypeTable.get($i.text);
+            if (localTypeValue == null) {
+            	System.out.println("id :"+$i.text);
+            	Integer typeValue = (Integer)typeTable.get($i.text);
+		if(typeValue == null){
+			$typecheck = new ErrorChecker();
+		}else{
+			$typecheck = new IdChecker(typeValue.intValue());
+		}
             } else {
-		$typecheck = new IdChecker(typeValue.intValue());
+		$typecheck = new IdChecker(localTypeValue.intValue());
        	}
        	
             }
-          	| LPAR {$code = "";}
-          	  (e=expr {$code = $e.code;}
-       	  (COMMA f=expr {$code = $f.code+$code;})* )? 
-              RPAR {$code = "\tlfp\n"+$code+"\tjal "+$i.text+"\n";}
+          	| LPAR 
+          	{
+          	$code = "";
+          	
+          	
+          	   	
+          	}
+          	  (e=expr 
+          	  {
+          	  $code = $e.code;
+          	  
+          	  funcParametersTypeList.add(new ExprChecker($e.typecheck));
+          	  
+          	  }
+       	  (COMMA f=expr 
+       	  {
+       	  
+       	  $code = $f.code+$code;
+       	  
+       	  funcParametersTypeList.add(new ExprChecker($f.typecheck));
+       	  
+       	  }
+       	  )* )? 
+              RPAR 
+              {
+              
+              $code = "\tlfp\n"+$code+"\tjal "+$i.text+"\n";
+              
+              LinkedList<Integer> declaredParametersTypeList = (LinkedList<Integer>) functionParametersTypeTable.get($i.text);
+              System.out.println("retrieved functionParametersTypeTable id: "+$i.text);
+              System.out.println("retrieved functionParametersTypeTable size: "+declaredParametersTypeList.size());
+              System.out.println("retrieved functionParametersTypeTable: "+declaredParametersTypeList.toString());
+              
+              int returnType =((Integer)functionReturnValues.get($i.text)).intValue();
+              $typecheck = new FuncChecker( returnType, funcParametersTypeList, declaredParametersTypeList);
+              
+              // empty
+              funcParametersTypeList = new LinkedList<Checker>();
+              
+              }
           	)                
         	| LPAR e=expr 
           	( RPAR {$code = $e.code;}
@@ -304,6 +392,9 @@ factor 	returns [String code, Checker typecheck]
           	   "label"+(labelCounter-2)+":\n"+
           	   $e2.code+
           	   "label"+(labelCounter-1)+":\n";
+        
+        	$typecheck = new IfChecker($e1.typecheck, $e2.typecheck, $e3.typecheck);  	   
+          	   
       	}           	   
         	;
         	                        

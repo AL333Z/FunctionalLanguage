@@ -13,13 +13,50 @@ print pippo;
 /*
  *	Simple var assignment and print
  */
-
+ 
 def INT num = 10;
-def BOOL state = false;
+def BOOL state = true;
 
-print state;
 print num;
+print state;
 
+/*
+ * Fn INT -> BOOL
+ */
+
+def INT double(INT number) =
+if (number == 0) then 0 else number+number;
+	
+def INT test0 = double(0);
+def INT test1 = double(1);
+
+print test0;
+print test1;
+
+
+/*
+ * Fn INT -> BOOL
+ */
+def BOOL isZero(INT number) =
+if (number == 0) then true else false;
+
+def BOOL prova0 = isZero(0);
+print prova0;
+
+def BOOL prova1 = isZero(1);
+print prova1;
+
+/*
+ * Fn INT, BOOL -> BOOL
+ */
+def INT testFn(INT num, BOOL cond) =
+if(cond == true) then num else 0;
+
+def INT testFnFalse = testFn(5, false);
+print testFnFalse;
+
+def INT testFnTrue = testFn(5, true);
+print testFnTrue;
 
 
 
@@ -31,5 +68,4 @@ print num;
 
 def INT err = state;
 print err;
-
 */
