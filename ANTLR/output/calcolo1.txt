@@ -58,6 +58,14 @@ print testFnFalse;
 def INT testFnTrue = testFn(5, true);
 print testFnTrue;
 
+/*
+ * List declarations
+ */
+def LIST-OF[INT] lista = [5,[3,empty]];
+def LIST-OF[BOOL] lista2 = [true,[false,empty]];
+def LIST-OF[INT] lista3 = [1,[5,[3,empty]]];
+def LIST-OF[BOOL] lista4 = [false,[true,[false,empty]]];
+def LIST-OF[BOOL] lista5 = [false,empty];
 
 
 /*
@@ -66,7 +74,7 @@ print testFnTrue;
 
 /* Type mismatch Error
 */
-
+/*
 def INT err = state;
 print err;
-
+*/

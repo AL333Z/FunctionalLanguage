@@ -1,5 +1,5 @@
 /* INTRODURRE la dichiarazione di funzioni */
-
+/*
 def sommatoria(n) =
   if (n == 0) then 0
   else n+sommatoria(n-1);
@@ -20,3 +20,20 @@ def fattoriale(n) =
 print sommatoria(5);
 print fibonacci(5);
 print fattoriale(5);
+*/
+
+def LIST-OF[INT] lista = [5,[3,empty]];
+def LIST-OF[BOOL] lista2 = [true,[false,empty]];
+def LIST-OF[INT] lista3 = [1,[5,[3,empty]]];
+def LIST-OF[BOOL] lista4 = [false,[true,[false,empty]]];
+def LIST-OF[BOOL] lista5 = [false,empty];
+def LIST-OF[INT] emptylist = empty;
+
+
+def INT sommatutti( LIST-OF[INT] l) = 
+ if (l==empty) then 0
+               else 100;  
+def INT testSommaTutti = sommatutti(lista);
+print testSommaTutti;
+
+               

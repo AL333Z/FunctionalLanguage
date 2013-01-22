@@ -42,18 +42,13 @@ prog	returns [String code,  Checker typecheck]
         	$code = $c.code+"\n";
 	$typecheck = new CommandChecker($c.typecheck);
 	
-	System.out.println("Processing: "+$c.text);
-        	
         	}
         	
 	 (d=command SEMIC 
 	 {
 	 
-	 $code += $d.code+"\n";
-	 
+	 $code += $d.code+"\n"; 
 	$typecheck = new ProgramChecker($typecheck, $d.typecheck);
-	
-	System.out.println("Processing: "+$d.text);
 	 
 	 } )* 	{ $code+="\thalt\n"+functionCode;}
  	;
@@ -69,7 +64,7 @@ primitiveType returns[Type typevalue]
 	;
 
 compoundType returns [Type typevalue]
-	: (LISTOF LSPAR t=type RSPAR) {$typevalue = new ListType($t.typevalue); }
+	: (LISTOF LSPAR t=primitiveType RSPAR) {$typevalue = new ListType($t.typevalue); }
 	;
 	  
 command	returns [String code, Checker typecheck]
@@ -97,7 +92,7 @@ command	returns [String code, Checker typecheck]
             j=ID 
             {
             localSymTable.put($j.text,new Integer(parameterCounter++));
-            //TODO
+  
             localTypeTable.put($j.text,$t.typevalue);
             
             //  save first param type
@@ -107,7 +102,7 @@ command	returns [String code, Checker typecheck]
             (COMMA t=type k=ID
             {
             localSymTable.put($k.text,new Integer(parameterCounter++));
-            //TODO
+       
             localTypeTable.put($k.text, $t.typevalue);
             
        	parametersTypeList.add($t.typevalue);
@@ -144,7 +139,6 @@ command	returns [String code, Checker typecheck]
             parameterCounter=0;
             localSymTable=new HashMap();
             
-                        //TODO
             localTypeTable = new HashMap();
             
             $typecheck = new ExprChecker($e.typecheck);
@@ -238,7 +232,7 @@ factor 	returns [String code, Checker typecheck]
  	: n=NUMBER {$code = "\tpush "+$n.text+"\n"; $typecheck = new NumberChecker(); }
  	| TRUE {$code = "\tpush "+TRUEVALUE+"\n"; $typecheck = new BoolChecker(); }
  	| FALSE {$code = "\tpush "+FALSEVALUE+"\n"; $typecheck = new BoolChecker(); }
- 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $typecheck = new ListChecker(); }
+ 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $typecheck = new ListChecker(null, null);  System.out.println("Creato EMPTY"); }
  	| NOT e=expr
  	{
  	$code = $e.code+
@@ -269,7 +263,7 @@ factor 	returns [String code, Checker typecheck]
                    "\tadd\n"+
                    "\tshp\n";
                    
-                   //TODO
+                   $typecheck = new ListChecker($e.typecheck, $f.typecheck);
                    
       	}
         	| i=ID 
@@ -384,13 +378,20 @@ factor 	returns [String code, Checker typecheck]
           	   
        	}    
         	| DOT 
-            ( FIRST {$code = $e.code+"\tlw\n";} 
+            ( FIRST 
+            {
+            $code = $e.code+"\tlw\n";
+            //TODO
+            $typecheck = new ExprChecker($e.typecheck);
+            } 
             | REST
             {
             	$code = $e.code+
                              "\tpush 1"+
                              "\tadd\n"+
                              "\tlw\n";
+                     	//TODO
+                         
          	}
             ) RPAR 	          
           	)
