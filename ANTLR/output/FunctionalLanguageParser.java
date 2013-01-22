@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-22 16:38:56
+// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-22 17:48:23
 
 
 import java.util.HashMap;
@@ -130,10 +130,12 @@ public class FunctionalLanguageParser extends Parser {
                     	
                     	retval.code = (c!=null?c.code:null)+"\n";
             	retval.typecheck = new CommandChecker((c!=null?c.typecheck:null));
+            	
+            	System.out.println("Processing: "+(c!=null?input.toString(c.start,c.stop):null));
                     	
                     	
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:47:3: (d= command SEMIC )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:49:3: (d= command SEMIC )*
             loop1:
             do {
                 int alt1=2;
@@ -146,7 +148,7 @@ public class FunctionalLanguageParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:47:4: d= command SEMIC
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:49:4: d= command SEMIC
             	    {
             	    pushFollow(FOLLOW_command_in_prog70);
             	    d=command();
@@ -161,6 +163,8 @@ public class FunctionalLanguageParser extends Parser {
             	    	 retval.code += (d!=null?d.code:null)+"\n";
             	    	 
             	    	retval.typecheck = new ProgramChecker(retval.typecheck, (d!=null?d.typecheck:null));
+            	    	
+            	    	System.out.println("Processing: "+(d!=null?input.toString(d.start,d.stop):null));
             	    	 
             	    	 
 
@@ -196,7 +200,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "type"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:57:1: type returns [Type typevalue] : (p= primitiveType |c= compoundType );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:61:1: type returns [Type typevalue] : (p= primitiveType |c= compoundType );
     public final Type type() throws RecognitionException {
         Type typevalue = null;
 
@@ -207,7 +211,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:58:2: (p= primitiveType |c= compoundType )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:62:2: (p= primitiveType |c= compoundType )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -226,7 +230,7 @@ public class FunctionalLanguageParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:58:4: p= primitiveType
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:62:4: p= primitiveType
                     {
                     pushFollow(FOLLOW_primitiveType_in_type103);
                     p=primitiveType();
@@ -239,7 +243,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:59:4: c= compoundType
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:4: c= compoundType
                     {
                     pushFollow(FOLLOW_compoundType_in_type112);
                     c=compoundType();
@@ -269,13 +273,13 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "primitiveType"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:62:1: primitiveType returns [Type typevalue] : ( INT | BOOL );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:66:1: primitiveType returns [Type typevalue] : ( INT | BOOL );
     public final Type primitiveType() throws RecognitionException {
         Type typevalue = null;
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:2: ( INT | BOOL )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:67:2: ( INT | BOOL )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -294,7 +298,7 @@ public class FunctionalLanguageParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:4: INT
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:67:4: INT
                     {
                     match(input,INT,FOLLOW_INT_in_primitiveType128); 
 
@@ -303,7 +307,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:64:4: BOOL
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:4: BOOL
                     {
                     match(input,BOOL,FOLLOW_BOOL_in_primitiveType136); 
 
@@ -329,7 +333,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "compoundType"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:67:1: compoundType returns [Type typevalue] : ( LISTOF LSPAR t= type RSPAR ) ;
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:71:1: compoundType returns [Type typevalue] : ( LISTOF LSPAR t= type RSPAR ) ;
     public final Type compoundType() throws RecognitionException {
         Type typevalue = null;
 
@@ -338,11 +342,11 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:2: ( ( LISTOF LSPAR t= type RSPAR ) )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:4: ( LISTOF LSPAR t= type RSPAR )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:2: ( ( LISTOF LSPAR t= type RSPAR ) )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:4: ( LISTOF LSPAR t= type RSPAR )
             {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:4: ( LISTOF LSPAR t= type RSPAR )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:5: LISTOF LSPAR t= type RSPAR
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:4: ( LISTOF LSPAR t= type RSPAR )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:5: LISTOF LSPAR t= type RSPAR
             {
             match(input,LISTOF,FOLLOW_LISTOF_in_compoundType155); 
 
@@ -384,7 +388,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "command"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:71:1: command returns [String code, Checker typecheck] : ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:75:1: command returns [String code, Checker typecheck] : ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr );
     public final FunctionalLanguageParser.command_return command() throws RecognitionException {
         FunctionalLanguageParser.command_return retval = new FunctionalLanguageParser.command_return();
         retval.start = input.LT(1);
@@ -399,7 +403,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:2: ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:76:2: ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -418,7 +422,7 @@ public class FunctionalLanguageParser extends Parser {
             }
             switch (alt7) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:4: DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:76:4: DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
                     {
                     match(input,DEF,FOLLOW_DEF_in_command184); 
 
@@ -430,7 +434,7 @@ public class FunctionalLanguageParser extends Parser {
 
                     i=(Token)match(input,ID,FOLLOW_ID_in_command192); 
 
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:73:12: ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:77:12: ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -449,7 +453,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     switch (alt6) {
                         case 1 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:73:14: ASS e= expr
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:77:14: ASS e= expr
                             {
                             match(input,ASS,FOLLOW_ASS_in_command207); 
 
@@ -472,11 +476,11 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:84:14: LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:88:14: LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr
                             {
                             match(input,LPAR,FOLLOW_LPAR_in_command253); 
 
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:84:19: (t= type j= ID ( COMMA t= type k= ID )* )?
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:88:19: (t= type j= ID ( COMMA t= type k= ID )* )?
                             int alt5=2;
                             int LA5_0 = input.LA(1);
 
@@ -485,7 +489,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             switch (alt5) {
                                 case 1 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:85:13: t= type j= ID ( COMMA t= type k= ID )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:89:13: t= type j= ID ( COMMA t= type k= ID )*
                                     {
 
                                                	
@@ -512,7 +516,7 @@ public class FunctionalLanguageParser extends Parser {
                                                 
                                                 
 
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:103:13: ( COMMA t= type k= ID )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:107:13: ( COMMA t= type k= ID )*
                                     loop4:
                                     do {
                                         int alt4=2;
@@ -525,7 +529,7 @@ public class FunctionalLanguageParser extends Parser {
 
                                         switch (alt4) {
                                     	case 1 :
-                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:103:14: COMMA t= type k= ID
+                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:107:14: COMMA t= type k= ID
                                     	    {
                                     	    match(input,COMMA,FOLLOW_COMMA_in_command345); 
 
@@ -617,7 +621,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:150:12: PRINT e= expr
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:154:12: PRINT e= expr
                     {
                     match(input,PRINT,FOLLOW_PRINT_in_command463); 
 
@@ -663,7 +667,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "expr"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:161:1: expr returns [String code, Checker typecheck] : t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* ;
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:165:1: expr returns [String code, Checker typecheck] : t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* ;
     public final FunctionalLanguageParser.expr_return expr() throws RecognitionException {
         FunctionalLanguageParser.expr_return retval = new FunctionalLanguageParser.expr_return();
         retval.start = input.LT(1);
@@ -675,8 +679,8 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:162:2: (t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:162:4: t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:166:2: (t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:166:4: t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )*
             {
             pushFollow(FOLLOW_term_in_expr526);
             t=term();
@@ -691,7 +695,7 @@ public class FunctionalLanguageParser extends Parser {
             	
             	
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:170:12: ( PLUS t2= term | MINUS t2= term | OR t2= term )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:174:12: ( PLUS t2= term | MINUS t2= term | OR t2= term )*
             loop8:
             do {
                 int alt8=4;
@@ -716,7 +720,7 @@ public class FunctionalLanguageParser extends Parser {
 
                 switch (alt8) {
             	case 1 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:170:14: PLUS t2= term
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:174:14: PLUS t2= term
             	    {
             	    match(input,PLUS,FOLLOW_PLUS_in_expr547); 
 
@@ -736,7 +740,7 @@ public class FunctionalLanguageParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:179:14: MINUS t2= term
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:183:14: MINUS t2= term
             	    {
             	    match(input,MINUS,FOLLOW_MINUS_in_expr604); 
 
@@ -756,7 +760,7 @@ public class FunctionalLanguageParser extends Parser {
             	    }
             	    break;
             	case 3 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:186:14: OR t2= term
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:190:14: OR t2= term
             	    {
             	    match(input,OR,FOLLOW_OR_in_expr637); 
 
@@ -818,7 +822,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "term"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:206:1: term returns [String code, Checker typecheck] : f= factor ( AND f2= factor )* ;
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:210:1: term returns [String code, Checker typecheck] : f= factor ( AND f2= factor )* ;
     public final FunctionalLanguageParser.term_return term() throws RecognitionException {
         FunctionalLanguageParser.term_return retval = new FunctionalLanguageParser.term_return();
         retval.start = input.LT(1);
@@ -830,8 +834,8 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:207:10: (f= factor ( AND f2= factor )* )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:207:12: f= factor ( AND f2= factor )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:211:10: (f= factor ( AND f2= factor )* )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:211:12: f= factor ( AND f2= factor )*
             {
             pushFollow(FOLLOW_factor_in_term731);
             f=factor();
@@ -845,7 +849,7 @@ public class FunctionalLanguageParser extends Parser {
                     	
                     	
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:213:12: ( AND f2= factor )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:217:12: ( AND f2= factor )*
             loop9:
             do {
                 int alt9=2;
@@ -858,7 +862,7 @@ public class FunctionalLanguageParser extends Parser {
 
                 switch (alt9) {
             	case 1 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:213:13: AND f2= factor
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:217:13: AND f2= factor
             	    {
             	    match(input,AND,FOLLOW_AND_in_term758); 
 
@@ -920,7 +924,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "factor"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:233:1: factor returns [String code, Checker typecheck] : (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:237:1: factor returns [String code, Checker typecheck] : (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr );
     public final FunctionalLanguageParser.factor_return factor() throws RecognitionException {
         FunctionalLanguageParser.factor_return retval = new FunctionalLanguageParser.factor_return();
         retval.start = input.LT(1);
@@ -940,7 +944,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:234:3: (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:238:3: (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr )
             int alt15=9;
             switch ( input.LA(1) ) {
             case NUMBER:
@@ -998,7 +1002,7 @@ public class FunctionalLanguageParser extends Parser {
 
             switch (alt15) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:234:5: n= NUMBER
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:238:5: n= NUMBER
                     {
                     n=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_factor809); 
 
@@ -1007,7 +1011,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:235:5: TRUE
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:239:5: TRUE
                     {
                     match(input,TRUE,FOLLOW_TRUE_in_factor817); 
 
@@ -1016,7 +1020,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:236:5: FALSE
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:240:5: FALSE
                     {
                     match(input,FALSE,FOLLOW_FALSE_in_factor825); 
 
@@ -1025,7 +1029,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:237:5: EMPTY
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:241:5: EMPTY
                     {
                     match(input,EMPTY,FOLLOW_EMPTY_in_factor833); 
 
@@ -1034,7 +1038,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:238:5: NOT e= expr
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:242:5: NOT e= expr
                     {
                     match(input,NOT,FOLLOW_NOT_in_factor841); 
 
@@ -1061,7 +1065,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:252:12: LSPAR e= expr COMMA f= expr RSPAR
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:256:12: LSPAR e= expr COMMA f= expr RSPAR
                     {
                     match(input,LSPAR,FOLLOW_LSPAR_in_factor862); 
 
@@ -1103,11 +1107,11 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 7 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:271:12: i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:275:12: i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
                     {
                     i=(Token)match(input,ID,FOLLOW_ID_in_factor902); 
 
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:272:12: (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:276:12: (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1126,7 +1130,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     switch (alt12) {
                         case 1 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:273:12: 
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:277:12: 
                             {
 
                                       	Integer value = (Integer)localSymTable.get((i!=null?i.getText():null));
@@ -1159,7 +1163,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:300:14: LPAR (e= expr ( COMMA f= expr )* )? RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:304:14: LPAR (e= expr ( COMMA f= expr )* )? RPAR
                             {
                             match(input,LPAR,FOLLOW_LPAR_in_factor945); 
 
@@ -1170,7 +1174,7 @@ public class FunctionalLanguageParser extends Parser {
                                       	   	
                                       	
 
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:307:14: (e= expr ( COMMA f= expr )* )?
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:311:14: (e= expr ( COMMA f= expr )* )?
                             int alt11=2;
                             int LA11_0 = input.LA(1);
 
@@ -1179,7 +1183,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             switch (alt11) {
                                 case 1 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:307:15: e= expr ( COMMA f= expr )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:311:15: e= expr ( COMMA f= expr )*
                                     {
                                     pushFollow(FOLLOW_expr_in_factor977);
                                     e=expr();
@@ -1194,7 +1198,7 @@ public class FunctionalLanguageParser extends Parser {
                                               	  
                                               	  
 
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:314:11: ( COMMA f= expr )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:318:11: ( COMMA f= expr )*
                                     loop10:
                                     do {
                                         int alt10=2;
@@ -1207,7 +1211,7 @@ public class FunctionalLanguageParser extends Parser {
 
                                         switch (alt10) {
                                     	case 1 :
-                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:314:12: COMMA f= expr
+                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:318:12: COMMA f= expr
                                     	    {
                                     	    match(input,COMMA,FOLLOW_COMMA_in_factor1006); 
 
@@ -1268,7 +1272,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 8 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:341:12: LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:345:12: LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
                     {
                     match(input,LPAR,FOLLOW_LPAR_in_factor1115); 
 
@@ -1278,7 +1282,7 @@ public class FunctionalLanguageParser extends Parser {
                     state._fsp--;
 
 
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:342:12: ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:346:12: ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
                     int alt14=5;
                     switch ( input.LA(1) ) {
                     case RPAR:
@@ -1316,7 +1320,7 @@ public class FunctionalLanguageParser extends Parser {
 
                     switch (alt14) {
                         case 1 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:342:14: RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:346:14: RPAR
                             {
                             match(input,RPAR,FOLLOW_RPAR_in_factor1135); 
 
@@ -1325,7 +1329,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:343:14: EQUAL e2= expr RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:347:14: EQUAL e2= expr RPAR
                             {
                             match(input,EQUAL,FOLLOW_EQUAL_in_factor1152); 
 
@@ -1353,7 +1357,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             break;
                         case 3 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:356:14: LESS e2= expr RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:360:14: LESS e2= expr RPAR
                             {
                             match(input,LESS,FOLLOW_LESS_in_factor1188); 
 
@@ -1381,7 +1385,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             break;
                         case 4 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:369:14: GREATER e2= expr RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:373:14: GREATER e2= expr RPAR
                             {
                             match(input,GREATER,FOLLOW_GREATER_in_factor1227); 
 
@@ -1409,11 +1413,11 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             break;
                         case 5 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:382:12: DOT ( FIRST | REST ) RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:386:12: DOT ( FIRST | REST ) RPAR
                             {
                             match(input,DOT,FOLLOW_DOT_in_factor1265); 
 
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:383:13: ( FIRST | REST )
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:387:13: ( FIRST | REST )
                             int alt13=2;
                             int LA13_0 = input.LA(1);
 
@@ -1432,7 +1436,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             switch (alt13) {
                                 case 1 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:383:15: FIRST
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:387:15: FIRST
                                     {
                                     match(input,FIRST,FOLLOW_FIRST_in_factor1282); 
 
@@ -1441,7 +1445,7 @@ public class FunctionalLanguageParser extends Parser {
                                     }
                                     break;
                                 case 2 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:384:15: REST
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:388:15: REST
                                     {
                                     match(input,REST,FOLLOW_REST_in_factor1301); 
 
@@ -1469,7 +1473,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 9 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:393:6: IF e1= expr THEN e2= expr ELSE e3= expr
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:397:6: IF e1= expr THEN e2= expr ELSE e3= expr
                     {
                     match(input,IF,FOLLOW_IF_in_factor1363); 
 

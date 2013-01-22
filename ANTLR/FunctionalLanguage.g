@@ -41,6 +41,8 @@ prog	returns [String code,  Checker typecheck]
         	
         	$code = $c.code+"\n";
 	$typecheck = new CommandChecker($c.typecheck);
+	
+	System.out.println("Processing: "+$c.text);
         	
         	}
         	
@@ -50,6 +52,8 @@ prog	returns [String code,  Checker typecheck]
 	 $code += $d.code+"\n";
 	 
 	$typecheck = new ProgramChecker($typecheck, $d.typecheck);
+	
+	System.out.println("Processing: "+$d.text);
 	 
 	 } )* 	{ $code+="\thalt\n"+functionCode;}
  	;

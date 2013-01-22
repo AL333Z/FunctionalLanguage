@@ -65,7 +65,8 @@ print testFnTrue;
  */
 
 /* Type mismatch Error
+*/
 
 def INT err = state;
 print err;
-*/
+
