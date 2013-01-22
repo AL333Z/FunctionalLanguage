@@ -1,6 +1,7 @@
 
 import org.antlr.runtime.*;
 
+import com.al333z.type.Type;
 import com.al333z.typechecking.Checker;
 import com.al333z.typechecking.CommandChecker;
 
@@ -26,10 +27,10 @@ class Test {
         fstream.close();
         
         Checker progChecker = ret.typecheck;
-        int res = progChecker.check();
+        Type res = progChecker.check();
         System.out.println("Res: "+res);
         
-        if (res != Checker.ERROR) {
+        if (!res.isErrorType()) {
         	// Let's run!
         	
             StackVirtualMachineLexer lex2 = new StackVirtualMachineLexer(new ANTLRFileStream(args[0]+".asm"));

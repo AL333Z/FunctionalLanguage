@@ -5,6 +5,7 @@ grammar FunctionalLanguage;
 import java.util.HashMap;
 import java.util.LinkedList;
 import com.al333z.typechecking.*;
+import com.al333z.type.*;
 
 }
 
@@ -22,7 +23,7 @@ private HashMap functionParametersTypeTable = new HashMap();
 private HashMap functionReturnValues = new HashMap();
 
 private LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
-private LinkedList<Integer> parametersTypeList = new LinkedList<Integer>();
+private LinkedList<Type> parametersTypeList = new LinkedList<Type>();
 
 private final static int TRUEVALUE = 1;
 private final static int FALSEVALUE = 0;
@@ -53,20 +54,27 @@ prog	returns [String code,  Checker typecheck]
 	 } )* 	{ $code+="\thalt\n"+functionCode;}
  	;
  	
-type returns [int typevalue]
-	: INT	{$typevalue = Checker.INT; }
-	| BOOL {$typevalue = Checker.BOOL; }
-	| (LISTOF LSPAR type RSPAR) {$typevalue = Checker.LISTOF; }
+type returns [Type typevalue]
+	: p=primitiveType { $typevalue = $p.typevalue; }
+	| c=compoundType {$typevalue = $c.typevalue; }
 	;
-		 	
- 	  
+
+primitiveType returns[Type typevalue]
+	: INT		{$typevalue = new IntType(); }
+	| BOOL 	{$typevalue = new BoolType(); }
+	;
+
+compoundType returns [Type typevalue]
+	: (LISTOF LSPAR t=type RSPAR) {$typevalue = new ListType($t.typevalue); }
+	;
+	  
 command	returns [String code, Checker typecheck]
 	: DEF t=type i=ID
           	( ASS e=expr 
           	{
           	
             symTable.put($i.text,new Integer(staticData));
-            typeTable.put($i.text,new Integer($t.typevalue));
+            typeTable.put($i.text, $t.typevalue);
             $code = $e.code+"\tpush "+(staticData++)+"\n"+"\tsw\n";
             
             $typecheck = new ExprAssignmentChecker($t.typevalue , $e.typecheck);
@@ -77,7 +85,7 @@ command	returns [String code, Checker typecheck]
            	{
            	
            	// save func return values
-           	functionReturnValues.put($i.text, new Integer($t.typevalue));
+           	functionReturnValues.put($i.text, $t.typevalue);
            	
            	}
            	
@@ -86,19 +94,19 @@ command	returns [String code, Checker typecheck]
             {
             localSymTable.put($j.text,new Integer(parameterCounter++));
             //TODO
-            localTypeTable.put($j.text,new Integer($t.typevalue));
+            localTypeTable.put($j.text,$t.typevalue);
             
             //  save first param type
-       	parametersTypeList.add(new Integer($t.typevalue));
+       	parametersTypeList.add($t.typevalue);
             
             }
             (COMMA t=type k=ID
             {
             localSymTable.put($k.text,new Integer(parameterCounter++));
             //TODO
-            localTypeTable.put($k.text,new Integer($t.typevalue));
+            localTypeTable.put($k.text, $t.typevalue);
             
-       	parametersTypeList.add(new Integer($t.typevalue));
+       	parametersTypeList.add($t.typevalue);
             
             } 
             )* )? RPAR
@@ -110,7 +118,7 @@ command	returns [String code, Checker typecheck]
             	System.out.println("saved functionParametersTypeTable size: "+parametersTypeList.size());
             	System.out.println("saved functionParametersTypeTable: "+parametersTypeList.toString());
             	
-            	parametersTypeList = new LinkedList<Integer>();
+            	parametersTypeList = new LinkedList<Type>();
             }
              ASS e=expr
             {
@@ -275,17 +283,17 @@ factor 	returns [String code, Checker typecheck]
                         "\tlw\n";
        	}
        	
-       	Integer localTypeValue = (Integer)localTypeTable.get($i.text);
+       	Type localTypeValue = (Type)localTypeTable.get($i.text);
             if (localTypeValue == null) {
             	System.out.println("id :"+$i.text);
-            	Integer typeValue = (Integer)typeTable.get($i.text);
+            	Type typeValue = (Type)typeTable.get($i.text);
 		if(typeValue == null){
 			$typecheck = new ErrorChecker();
 		}else{
-			$typecheck = new IdChecker(typeValue.intValue());
+			$typecheck = new IdChecker(typeValue);
 		}
             } else {
-		$typecheck = new IdChecker(localTypeValue.intValue());
+		$typecheck = new IdChecker(localTypeValue);
        	}
        	
             }
@@ -317,12 +325,12 @@ factor 	returns [String code, Checker typecheck]
               
               $code = "\tlfp\n"+$code+"\tjal "+$i.text+"\n";
               
-              LinkedList<Integer> declaredParametersTypeList = (LinkedList<Integer>) functionParametersTypeTable.get($i.text);
+              LinkedList<Type> declaredParametersTypeList = (LinkedList<Type>) functionParametersTypeTable.get($i.text);
               System.out.println("retrieved functionParametersTypeTable id: "+$i.text);
               System.out.println("retrieved functionParametersTypeTable size: "+declaredParametersTypeList.size());
               System.out.println("retrieved functionParametersTypeTable: "+declaredParametersTypeList.toString());
               
-              int returnType =((Integer)functionReturnValues.get($i.text)).intValue();
+              Type returnType =((Type)functionReturnValues.get($i.text));
               $typecheck = new FuncChecker( returnType, funcParametersTypeList, declaredParametersTypeList);
               
               // empty
