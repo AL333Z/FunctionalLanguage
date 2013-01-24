@@ -22,18 +22,32 @@ print fibonacci(5);
 print fattoriale(5);
 */
 
+
+/*
 def LIST-OF[INT] lista = [5,[3,empty]];
 def LIST-OF[BOOL] lista2 = [true,[false,empty]];
 def LIST-OF[INT] lista3 = [1,[5,[3,empty]]];
 def LIST-OF[BOOL] lista4 = [false,[true,[false,empty]]];
 def LIST-OF[BOOL] lista5 = [false,empty];
 def LIST-OF[INT] emptylist = empty;
-
-
+*/
+             
 def INT sommatutti( LIST-OF[INT] l) = 
  if (l==empty) then 0
-               else 100;  
+               else (l.first) + sommatutti( (l.rest) );   
+
+
+
+
+
+/*
 def INT testSommaTutti = sommatutti(lista);
 print testSommaTutti;
+
+def INT testSommaTuttiEmpty = sommatutti(emptylist);
+print testSommaTuttiEmpty;
+*/
+
+
 
                

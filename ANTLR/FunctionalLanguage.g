@@ -337,7 +337,11 @@ factor 	returns [String code, Checker typecheck]
               }
           	)                
         	| LPAR e=expr 
-          	( RPAR {$code = $e.code;}
+          	( RPAR 
+          	{
+          	$code = $e.code;
+          	$typecheck = $e.typecheck;
+          	}
           	| EQUAL e2=expr RPAR 
             {
             $code = $e2.code+$e.code+
@@ -378,20 +382,30 @@ factor 	returns [String code, Checker typecheck]
           	   
        	}    
         	| DOT 
+        	{
+        	
+            ExprChecker checker = new ExprChecker($e.typecheck);
+            if(!checker.isListType()){
+            	$typecheck = new ErrorChecker();
+            }else{
+            	$typecheck = new ListChecker(null, null);
+            }
+        	
+        	}
+        	
+        	
             ( FIRST 
             {
+            
             $code = $e.code+"\tlw\n";
-            //TODO
-            $typecheck = new ExprChecker($e.typecheck);
+            
             } 
             | REST
             {
             	$code = $e.code+
                              "\tpush 1"+
                              "\tadd\n"+
-                             "\tlw\n";
-                     	//TODO
-                         
+                             "\tlw\n";                         
          	}
             ) RPAR 	          
           	)
