@@ -1,4 +1,4 @@
-/*def sommatutti(l) = 
+def INT sommatutti( LIST-OF[INT] l) = 
  if (l==empty) then 0
                else (l.first)+sommatutti( (l.rest) );  
 
@@ -7,7 +7,6 @@ print sommatutti([5,[3,empty]]);
 
 def INT pippo = (5-3+2+3);
 print pippo;
-*/
 
 
 /*

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-24 16:46:00
+// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-24 17:22:48
 
 
 import java.util.HashMap;
@@ -1416,16 +1416,11 @@ public class FunctionalLanguageParser extends Parser {
 
 
                                     	
-                                        ExprChecker checker = new ExprChecker((e!=null?e.typecheck:null));
-                                        if(!checker.isListType()){
-                                        	retval.typecheck = new ErrorChecker();
-                                        }else{
-                                        	retval.typecheck = new ListChecker(null, null);
-                                        }
+
                                     	
                                     	
 
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:397:13: ( FIRST | REST )
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:392:13: ( FIRST | REST )
                             int alt13=2;
                             int LA13_0 = input.LA(1);
 
@@ -1444,7 +1439,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             switch (alt13) {
                                 case 1 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:397:15: FIRST
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:392:15: FIRST
                                     {
                                     match(input,FIRST,FOLLOW_FIRST_in_factor1325); 
 
@@ -1452,20 +1447,35 @@ public class FunctionalLanguageParser extends Parser {
                                                 
                                                 retval.code = (e!=null?e.code:null)+"\tlw\n";
                                                 
+                                                ExprChecker checker = new ExprChecker((e!=null?e.typecheck:null));
+                                                if(!checker.isListType()){
+                                                	retval.typecheck = new ErrorChecker();
+                                                }else{
+                                                	retval.typecheck = new FirstChecker((e!=null?e.typecheck:null));
+                                                }
+                                                
                                                 
 
                                     }
                                     break;
                                 case 2 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:403:15: REST
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:405:15: REST
                                     {
                                     match(input,REST,FOLLOW_REST_in_factor1357); 
 
 
-                                                	retval.code = (e!=null?e.code:null)+
+                                                retval.code = (e!=null?e.code:null)+
                                                                  "\tpush 1"+
                                                                  "\tadd\n"+
-                                                                 "\tlw\n";                         
+                                                                 "\tlw\n";    
+                                                                 
+                                           	ExprChecker checker = new ExprChecker((e!=null?e.typecheck:null));
+                                              	 if(!checker.isListType()){
+                                                	retval.typecheck = new ErrorChecker();
+                                                }else{
+                                                	retval.typecheck =checker;
+                                                }           
+                                                          
                                              	
 
                                     }
@@ -1485,7 +1495,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 9 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:412:6: IF e1= expr THEN e2= expr ELSE e3= expr
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:422:6: IF e1= expr THEN e2= expr ELSE e3= expr
                     {
                     match(input,IF,FOLLOW_IF_in_factor1419); 
 

@@ -23,7 +23,7 @@ private HashMap functionParametersTypeTable = new HashMap();
 private HashMap functionReturnValues = new HashMap();
 
 private LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
-private LinkedList<Type> parametersTypeList = new LinkedList<Type>();
+private LinkedList<Type>  = new LinkedList<Type>();
 
 private final static int TRUEVALUE = 1;
 private final static int FALSEVALUE = 0;
@@ -384,12 +384,7 @@ factor 	returns [String code, Checker typecheck]
         	| DOT 
         	{
         	
-            ExprChecker checker = new ExprChecker($e.typecheck);
-            if(!checker.isListType()){
-            	$typecheck = new ErrorChecker();
-            }else{
-            	$typecheck = new ListChecker(null, null);
-            }
+
         	
         	}
         	
@@ -399,13 +394,28 @@ factor 	returns [String code, Checker typecheck]
             
             $code = $e.code+"\tlw\n";
             
+            ExprChecker checker = new ExprChecker($e.typecheck);
+            if(!checker.isListType()){
+            	$typecheck = new ErrorChecker();
+            }else{
+            	$typecheck = new FirstChecker($e.typecheck);
+            }
+            
             } 
             | REST
             {
-            	$code = $e.code+
+            $code = $e.code+
                              "\tpush 1"+
                              "\tadd\n"+
-                             "\tlw\n";                         
+                             "\tlw\n";    
+                             
+       	ExprChecker checker = new ExprChecker($e.typecheck);
+          	 if(!checker.isListType()){
+            	$typecheck = new ErrorChecker();
+            }else{
+            	$typecheck =checker;
+            }           
+                      
          	}
             ) RPAR 	          
           	)
