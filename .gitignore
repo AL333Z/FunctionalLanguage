@@ -7,3 +7,6 @@ gen/
 
 # Local configuration file (sdk path, etc)
 local.properties
+
+# ad Hoc
+*txt.asm
