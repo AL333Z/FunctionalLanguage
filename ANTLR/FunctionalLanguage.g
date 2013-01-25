@@ -22,8 +22,9 @@ private HashMap localTypeTable = new HashMap();
 private HashMap functionParametersTypeTable = new HashMap();
 private HashMap functionReturnValues = new HashMap();
 
-private LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
-private LinkedList<Type>  = new LinkedList<Type>();
+//private LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
+private LinkedList<LinkedList<Checker>> funcParametersTypeListOfList = new LinkedList<LinkedList<Checker>>();
+private LinkedList<Type> parametersTypeList = new LinkedList<Type>();
 
 private final static int TRUEVALUE = 1;
 private final static int FALSEVALUE = 0;
@@ -299,13 +300,14 @@ factor 	returns [String code, Checker typecheck]
           	{
           	$code = "";
           	
-          	
+          	LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
           	   	
           	}
           	  (e=expr 
           	  {
           	  $code = $e.code;
           	  
+      	  
           	  funcParametersTypeList.add(new ExprChecker($e.typecheck));
           	  
           	  }
@@ -329,10 +331,13 @@ factor 	returns [String code, Checker typecheck]
               System.out.println("retrieved functionParametersTypeTable: "+declaredParametersTypeList.toString());
               
               Type returnType =((Type)functionReturnValues.get($i.text));
+              
+              funcParametersTypeListOfList.add(funcParametersTypeList);
+              
               $typecheck = new FuncChecker( returnType, funcParametersTypeList, declaredParametersTypeList);
               
               // empty
-              funcParametersTypeList = new LinkedList<Checker>();
+              funcParametersTypeListOfList.removeLastOccurrence(funcParametersTypeList);
               
               }
           	)                
