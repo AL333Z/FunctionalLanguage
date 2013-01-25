@@ -28,7 +28,7 @@ class Test {
         
         Node progChecker = ret.node;
         Type res = progChecker.check();
-        System.out.println("Res: "+res);
+        //System.out.println("Res: "+res);
         
         if (!res.isErrorType()) {
         	// Let's run!
@@ -40,7 +40,10 @@ class Test {
             SVM m = new SVM(parser2.createCode());
             
             m.run();
-		}
+        }else{
+        	System.out.println("Type-checking error!");
+        }
+        
         
     }
 }

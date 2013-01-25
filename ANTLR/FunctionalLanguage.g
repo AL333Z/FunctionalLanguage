@@ -197,7 +197,7 @@ factor 	returns [String code, Node node]
  	: n=NUMBER {$code = "\tpush "+$n.text+"\n"; $node = new NumberNode(); }
  	| TRUE {$code = "\tpush "+TRUEVALUE+"\n"; $node = new BoolNode(); }
  	| FALSE {$code = "\tpush "+FALSEVALUE+"\n"; $node = new BoolNode(); }
- 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $node = new ListNode(null, null);  System.out.println("Creato EMPTY"); }
+ 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $node = new ListNode(null, null);  }
  	| NOT e=expr
  	{
  	$code = $e.code+
@@ -246,7 +246,6 @@ factor 	returns [String code, Node node]
        	
        	Type localTypeValue = (Type)localTypeTable.get($i.text);
             if (localTypeValue == null) {
-            	System.out.println("id :"+$i.text);
             	Type typeValue = (Type)typeTable.get($i.text);
 		if(typeValue == null){
 			$node = new ErrorNode();
