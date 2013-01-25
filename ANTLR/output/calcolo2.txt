@@ -28,20 +28,17 @@ print sommatutti(empty);
 
 
 def INT mult( INT a, INT b ) =
-  if (a == 0) then b
-  else a+mult(a-1,b);
+  if (b == 1) then a
+  else a+mult(a, b-1);
 
 print mult( 5, 10 );
-
-/*
 
 def INT fattoriale( INT n ) =
   if (n == 0) then 1
   else mult( n , fattoriale(n-1) );
 
+print fattoriale(5);
 
-print fattoriale(4);
-*/
 
 
                
