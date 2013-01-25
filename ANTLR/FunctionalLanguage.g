@@ -22,8 +22,7 @@ private HashMap localTypeTable = new HashMap();
 private HashMap functionParametersTypeTable = new HashMap();
 private HashMap functionReturnValues = new HashMap();
 
-//private LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
-private LinkedList<LinkedList<Checker>> funcParametersTypeListOfList = new LinkedList<LinkedList<Checker>>();
+private LinkedList<LinkedList<Node>> funcParametersTypeListOfList = new LinkedList<LinkedList<Node>>();
 private LinkedList<Type> parametersTypeList = new LinkedList<Type>();
 
 private final static int TRUEVALUE = 1;
@@ -36,21 +35,17 @@ private String functionCode = new String();
 
 // parser
 
-prog	returns [String code,  Checker typecheck]
+prog	returns [String code,  Node node]
         	: c=command SEMIC 
         	{
-        	
         	$code = $c.code+"\n";
-	$typecheck = new CommandChecker($c.typecheck);
-	
+	$node = new CommandNode($c.node);
         	}
         	
-	 (d=command SEMIC 
-	 {
-	 
-	 $code += $d.code+"\n"; 
-	$typecheck = new ProgramChecker($typecheck, $d.typecheck);
-	 
+	(d=command SEMIC 
+	{
+	$code += $d.code+"\n"; 
+	$node = new ProgramNode($node, $d.node); 
 	 } )* 	{ $code+="\thalt\n"+functionCode;}
  	;
  	
@@ -68,56 +63,41 @@ compoundType returns [Type typevalue]
 	: (LISTOF LSPAR t=primitiveType RSPAR) {$typevalue = new ListType($t.typevalue); }
 	;
 	  
-command	returns [String code, Checker typecheck]
+command	returns [String code, Node node]
 	: DEF t=type i=ID
           	( ASS e=expr 
           	{
-          	
             symTable.put($i.text,new Integer(staticData));
             typeTable.put($i.text, $t.typevalue);
             $code = $e.code+"\tpush "+(staticData++)+"\n"+"\tsw\n";
-            
-            $typecheck = new ExprAssignmentChecker($t.typevalue , $e.typecheck);
-            
+            $node = new ExprAssignmentNode($t.typevalue , $e.node);
             }
             
            	|LPAR ( 
            	{
-           	
            	// save func return values
            	functionReturnValues.put($i.text, $t.typevalue);
-           	
            	}
            	
            	t=type
             j=ID 
             {
             localSymTable.put($j.text,new Integer(parameterCounter++));
-  
             localTypeTable.put($j.text,$t.typevalue);
             
             //  save first param type
-       	parametersTypeList.add($t.typevalue);
-            
+       	parametersTypeList.add($t.typevalue);           
             }
             (COMMA t=type k=ID
             {
             localSymTable.put($k.text,new Integer(parameterCounter++));
-       
             localTypeTable.put($k.text, $t.typevalue);
-            
        	parametersTypeList.add($t.typevalue);
-            
             } 
             )* )? RPAR
             {
             	// save parameters type list
-            	functionParametersTypeTable.put($i.text, parametersTypeList);
-            	
-            	System.out.println("saved functionParametersTypeTable id: "+$i.text);
-            	System.out.println("saved functionParametersTypeTable size: "+parametersTypeList.size());
-            	System.out.println("saved functionParametersTypeTable: "+parametersTypeList.toString());
-            	
+            	functionParametersTypeTable.put($i.text, parametersTypeList);            	
             	parametersTypeList = new LinkedList<Type>();
             }
              ASS e=expr
@@ -141,46 +121,33 @@ command	returns [String code, Checker typecheck]
             localSymTable=new HashMap();
             
             localTypeTable = new HashMap();
-            
-            $typecheck = new ExprChecker($e.typecheck);
-                       
+            $node = new ExprNode($e.node);
          	} 
           	) 
         	| PRINT e=expr 
-        	
         	{
-        	
         	$code = $e.code+"\tprint\n";
-        	
-        	$typecheck = new PrintChecker($e.typecheck);
-        	
+        	$node = new PrintNode($e.node);
         	} 	  
         	;
         
-expr	returns [String code, Checker typecheck]
+expr	returns [String code, Node node]
 	: t=term
 	{
-	
 	$code = $t.code;
-	$typecheck = new TermChecker($t.typecheck);
-	
+	$node = new TermNode($t.node);
 	}	
 	
           	( PLUS t2=term 
           	{
-          	
           	$code+=$t2.code+"\tadd\n";
-          	$typecheck = new PlusChecker($typecheck, $t2.typecheck);
-          	
+          	$node = new PlusNode($node, $t2.node);
           	}
-          	
           	
           	| MINUS t2=term 
           	{
-          	
           	$code=$t2.code+$code+"\tsub\n";
-          	$typecheck = new MinusChecker($typecheck, $t2.typecheck);
-          	
+          	$node = new MinusNode($node, $t2.node);
           	}
           	| OR t2=term 
             {
@@ -196,18 +163,16 @@ expr	returns [String code, Checker typecheck]
             	     "\tpush "+TRUEVALUE+"\n"+
             	     "label"+(labelCounter-1)+":\n";
             	     
-        	$typecheck = new OrChecker($typecheck, $t2.typecheck);    	    
-            	    
+        	$node = new OrNode($node, $t2.node);    	    	    
        	}
           	)*  
         	;
                         
-term  	returns [String code, Checker typecheck]
+term  	returns [String code, Node node]
         	: f=factor 
         	{
         	$code=$f.code;
-        	$typecheck = new FactorChecker($f.typecheck);
-        	
+        	$node = new FactorNode($f.node);
         	} 
           	(AND f2=factor
            	{
@@ -223,17 +188,16 @@ term  	returns [String code, Checker typecheck]
             	        "\tpush "+FALSEVALUE+"\n"+
             	        "label"+(labelCounter-1)+":\n";
 	        
-       	$typecheck = new AndChecker($typecheck, $f2.typecheck);	
-            	        
+       	$node = new AndNode($node, $f2.node);		        
        	}
           	)*
 	;
 
-factor 	returns [String code, Checker typecheck]
- 	: n=NUMBER {$code = "\tpush "+$n.text+"\n"; $typecheck = new NumberChecker(); }
- 	| TRUE {$code = "\tpush "+TRUEVALUE+"\n"; $typecheck = new BoolChecker(); }
- 	| FALSE {$code = "\tpush "+FALSEVALUE+"\n"; $typecheck = new BoolChecker(); }
- 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $typecheck = new ListChecker(null, null);  System.out.println("Creato EMPTY"); }
+factor 	returns [String code, Node node]
+ 	: n=NUMBER {$code = "\tpush "+$n.text+"\n"; $node = new NumberNode(); }
+ 	| TRUE {$code = "\tpush "+TRUEVALUE+"\n"; $node = new BoolNode(); }
+ 	| FALSE {$code = "\tpush "+FALSEVALUE+"\n"; $node = new BoolNode(); }
+ 	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $node = new ListNode(null, null);  System.out.println("Creato EMPTY"); }
  	| NOT e=expr
  	{
  	$code = $e.code+
@@ -245,8 +209,7 @@ factor 	returns [String code, Checker typecheck]
             	   "\tpush "+FALSEVALUE+"\n"+
             	   "label"+(labelCounter-1)+":\n";
             	   
-        	$typecheck = new NotChecker($e.typecheck);
-        	
+        	$node = new NotNode($e.node);
          	}
         	| LSPAR e=expr COMMA f=expr RSPAR
           	{
@@ -264,8 +227,7 @@ factor 	returns [String code, Checker typecheck]
                    "\tadd\n"+
                    "\tshp\n";
                    
-                   $typecheck = new ListChecker($e.typecheck, $f.typecheck);
-                   
+                   $node = new ListNode($e.node, $f.node);
       	}
         	| i=ID 
           	( 
@@ -287,37 +249,29 @@ factor 	returns [String code, Checker typecheck]
             	System.out.println("id :"+$i.text);
             	Type typeValue = (Type)typeTable.get($i.text);
 		if(typeValue == null){
-			$typecheck = new ErrorChecker();
+			$node = new ErrorNode();
 		}else{
-			$typecheck = new IdChecker(typeValue);
+			$node = new IdNode(typeValue);
 		}
             } else {
-		$typecheck = new IdChecker(localTypeValue);
+		$node = new IdNode(localTypeValue);
        	}
        	
             }
           	| LPAR 
           	{
           	$code = "";
-          	
-          	LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
-          	   	
+          	LinkedList<Node> funcParametersTypeList = new LinkedList<Node>();   	
           	}
           	  (e=expr 
           	  {
           	  $code = $e.code;
-          	  
-      	  
-          	  funcParametersTypeList.add(new ExprChecker($e.typecheck));
-          	  
+          	  funcParametersTypeList.add(new ExprNode($e.node));
           	  }
        	  (COMMA f=expr 
        	  {
-       	  
        	  $code = $f.code+$code;
-       	  
-       	  funcParametersTypeList.add(new ExprChecker($f.typecheck));
-       	  
+       	  funcParametersTypeList.add(new ExprNode($f.node));
        	  }
        	  )* )? 
               RPAR 
@@ -326,26 +280,19 @@ factor 	returns [String code, Checker typecheck]
               $code = "\tlfp\n"+$code+"\tjal "+$i.text+"\n";
               
               LinkedList<Type> declaredParametersTypeList = (LinkedList<Type>) functionParametersTypeTable.get($i.text);
-              System.out.println("retrieved functionParametersTypeTable id: "+$i.text);
-              System.out.println("retrieved functionParametersTypeTable size: "+declaredParametersTypeList.size());
-              System.out.println("retrieved functionParametersTypeTable: "+declaredParametersTypeList.toString());
-              
               Type returnType =((Type)functionReturnValues.get($i.text));
-              
               funcParametersTypeListOfList.add(funcParametersTypeList);
-              
-              $typecheck = new FuncChecker( returnType, funcParametersTypeList, declaredParametersTypeList);
+              $node = new FuncNode( returnType, funcParametersTypeList, declaredParametersTypeList);
               
               // empty
               funcParametersTypeListOfList.removeLastOccurrence(funcParametersTypeList);
-              
               }
           	)                
         	| LPAR e=expr 
           	( RPAR 
           	{
           	$code = $e.code;
-          	$typecheck = $e.typecheck;
+          	$node = $e.node;
           	}
           	| EQUAL e2=expr RPAR 
             {
@@ -357,7 +304,7 @@ factor 	returns [String code, Checker typecheck]
           	   "\tpush "+TRUEVALUE+"\n"+
           	   "label"+(labelCounter-1)+":\n";
           	   
-        	$typecheck = new EqualChecker($e.typecheck, $e2.typecheck);
+        	$node = new EqualNode($e.node, $e2.node);
         	
          	}
           	| LESS e2=expr RPAR 
@@ -370,8 +317,7 @@ factor 	returns [String code, Checker typecheck]
           	   "\tpush "+TRUEVALUE+"\n"+
           	   "label"+(labelCounter-1)+":\n";
           
-       	$typecheck = new LessChecker($e.typecheck, $e2.typecheck);
-       	
+       	$node = new LessNode($e.node, $e2.node);
         	}   
          	 | GREATER e2=expr RPAR 
            	{
@@ -383,29 +329,20 @@ factor 	returns [String code, Checker typecheck]
           	   "\tpush "+TRUEVALUE+"\n"+
           	   "label"+(labelCounter-1)+":\n";
           	   
-        	$typecheck = new GreaterChecker($e.typecheck, $e2.typecheck);
-          	   
+        	$node = new GreaterNode($e.node, $e2.node);
        	}    
-        	| DOT 
-        	{
-        	
-
-        	
-        	}
-        	
-        	
+        	| DOT        	
             ( FIRST 
             {
             
             $code = $e.code+"\tlw\n";
             
-            ExprChecker checker = new ExprChecker($e.typecheck);
+            ExprNode checker = new ExprNode($e.node);
             if(!checker.isListType()){
-            	$typecheck = new ErrorChecker();
+            	$node = new ErrorNode();
             }else{
-            	$typecheck = new FirstChecker($e.typecheck);
+            	$node = new FirstNode($e.node);
             }
-            
             } 
             | REST
             {
@@ -414,13 +351,12 @@ factor 	returns [String code, Checker typecheck]
                              "\tadd\n"+
                              "\tlw\n";    
                              
-       	ExprChecker checker = new ExprChecker($e.typecheck);
+       	ExprNode checker = new ExprNode($e.node);
           	 if(!checker.isListType()){
-            	$typecheck = new ErrorChecker();
+            	$node = new ErrorNode();
             }else{
-            	$typecheck =checker;
-            }           
-                      
+            	$node =checker;
+            }  
          	}
             ) RPAR 	          
           	)
@@ -435,8 +371,7 @@ factor 	returns [String code, Checker typecheck]
           	   $e2.code+
           	   "label"+(labelCounter-1)+":\n";
         
-        	$typecheck = new IfChecker($e1.typecheck, $e2.typecheck, $e3.typecheck);  	   
-          	   
+        	$node = new IfNode($e1.node, $e2.node, $e3.node);
       	}           	   
         	;
         	                        

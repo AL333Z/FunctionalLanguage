@@ -2,8 +2,8 @@
 import org.antlr.runtime.*;
 
 import com.al333z.type.Type;
-import com.al333z.typechecking.Checker;
-import com.al333z.typechecking.CommandChecker;
+import com.al333z.typechecking.Node;
+import com.al333z.typechecking.CommandNode;
 
 import java.io.*;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ class Test {
         fstream.write(code);
         fstream.close();
         
-        Checker progChecker = ret.typecheck;
+        Node progChecker = ret.node;
         Type res = progChecker.check();
         System.out.println("Res: "+res);
         

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-24 19:21:22
+// $ANTLR 3.4 /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g 2013-01-25 15:04:42
 
 
 import java.util.HashMap;
@@ -85,8 +85,7 @@ public class FunctionalLanguageParser extends Parser {
     private HashMap functionParametersTypeTable = new HashMap();
     private HashMap functionReturnValues = new HashMap();
 
-    //private LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
-    private LinkedList<LinkedList<Checker>> funcParametersTypeListOfList = new LinkedList<LinkedList<Checker>>();
+    private LinkedList<LinkedList<Node>> funcParametersTypeListOfList = new LinkedList<LinkedList<Node>>();
     private LinkedList<Type> parametersTypeList = new LinkedList<Type>();
 
     private final static int TRUEVALUE = 1;
@@ -99,12 +98,12 @@ public class FunctionalLanguageParser extends Parser {
 
     public static class prog_return extends ParserRuleReturnScope {
         public String code;
-        public Checker typecheck;
+        public Node node;
     };
 
 
     // $ANTLR start "prog"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:39:1: prog returns [String code, Checker typecheck] : c= command SEMIC (d= command SEMIC )* ;
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:38:1: prog returns [String code, Node node] : c= command SEMIC (d= command SEMIC )* ;
     public final FunctionalLanguageParser.prog_return prog() throws RecognitionException {
         FunctionalLanguageParser.prog_return retval = new FunctionalLanguageParser.prog_return();
         retval.start = input.LT(1);
@@ -116,8 +115,8 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:40:10: (c= command SEMIC (d= command SEMIC )* )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:40:12: c= command SEMIC (d= command SEMIC )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:39:10: (c= command SEMIC (d= command SEMIC )* )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:39:12: c= command SEMIC (d= command SEMIC )*
             {
             pushFollow(FOLLOW_command_in_prog39);
             c=command();
@@ -128,13 +127,11 @@ public class FunctionalLanguageParser extends Parser {
             match(input,SEMIC,FOLLOW_SEMIC_in_prog41); 
 
 
-                    	
                     	retval.code = (c!=null?c.code:null)+"\n";
-            	retval.typecheck = new CommandChecker((c!=null?c.typecheck:null));
-            	
+            	retval.node = new CommandNode((c!=null?c.node:null));
                     	
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:48:3: (d= command SEMIC )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:45:2: (d= command SEMIC )*
             loop1:
             do {
                 int alt1=2;
@@ -147,21 +144,19 @@ public class FunctionalLanguageParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:48:4: d= command SEMIC
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:45:3: d= command SEMIC
             	    {
-            	    pushFollow(FOLLOW_command_in_prog70);
+            	    pushFollow(FOLLOW_command_in_prog69);
             	    d=command();
 
             	    state._fsp--;
 
 
-            	    match(input,SEMIC,FOLLOW_SEMIC_in_prog72); 
+            	    match(input,SEMIC,FOLLOW_SEMIC_in_prog71); 
 
 
-            	    	 
-            	    	 retval.code += (d!=null?d.code:null)+"\n"; 
-            	    	retval.typecheck = new ProgramChecker(retval.typecheck, (d!=null?d.typecheck:null));
-            	    	 
+            	    	retval.code += (d!=null?d.code:null)+"\n"; 
+            	    	retval.node = new ProgramNode(retval.node, (d!=null?d.node:null)); 
             	    	 
 
             	    }
@@ -196,7 +191,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "type"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:57:1: type returns [Type typevalue] : (p= primitiveType |c= compoundType );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:52:1: type returns [Type typevalue] : (p= primitiveType |c= compoundType );
     public final Type type() throws RecognitionException {
         Type typevalue = null;
 
@@ -207,7 +202,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:58:2: (p= primitiveType |c= compoundType )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:53:2: (p= primitiveType |c= compoundType )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -226,9 +221,9 @@ public class FunctionalLanguageParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:58:4: p= primitiveType
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:53:4: p= primitiveType
                     {
-                    pushFollow(FOLLOW_primitiveType_in_type103);
+                    pushFollow(FOLLOW_primitiveType_in_type101);
                     p=primitiveType();
 
                     state._fsp--;
@@ -239,9 +234,9 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:59:4: c= compoundType
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:54:4: c= compoundType
                     {
-                    pushFollow(FOLLOW_compoundType_in_type112);
+                    pushFollow(FOLLOW_compoundType_in_type110);
                     c=compoundType();
 
                     state._fsp--;
@@ -269,13 +264,13 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "primitiveType"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:62:1: primitiveType returns [Type typevalue] : ( INT | BOOL );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:57:1: primitiveType returns [Type typevalue] : ( INT | BOOL );
     public final Type primitiveType() throws RecognitionException {
         Type typevalue = null;
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:2: ( INT | BOOL )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:58:2: ( INT | BOOL )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -294,18 +289,18 @@ public class FunctionalLanguageParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:4: INT
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:58:4: INT
                     {
-                    match(input,INT,FOLLOW_INT_in_primitiveType128); 
+                    match(input,INT,FOLLOW_INT_in_primitiveType126); 
 
                     typevalue = new IntType(); 
 
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:64:4: BOOL
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:59:4: BOOL
                     {
-                    match(input,BOOL,FOLLOW_BOOL_in_primitiveType136); 
+                    match(input,BOOL,FOLLOW_BOOL_in_primitiveType134); 
 
                     typevalue = new BoolType(); 
 
@@ -329,7 +324,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
     // $ANTLR start "compoundType"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:67:1: compoundType returns [Type typevalue] : ( LISTOF LSPAR t= primitiveType RSPAR ) ;
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:62:1: compoundType returns [Type typevalue] : ( LISTOF LSPAR t= primitiveType RSPAR ) ;
     public final Type compoundType() throws RecognitionException {
         Type typevalue = null;
 
@@ -338,23 +333,23 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:2: ( ( LISTOF LSPAR t= primitiveType RSPAR ) )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:4: ( LISTOF LSPAR t= primitiveType RSPAR )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:2: ( ( LISTOF LSPAR t= primitiveType RSPAR ) )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:4: ( LISTOF LSPAR t= primitiveType RSPAR )
             {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:4: ( LISTOF LSPAR t= primitiveType RSPAR )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:5: LISTOF LSPAR t= primitiveType RSPAR
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:4: ( LISTOF LSPAR t= primitiveType RSPAR )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:63:5: LISTOF LSPAR t= primitiveType RSPAR
             {
-            match(input,LISTOF,FOLLOW_LISTOF_in_compoundType155); 
+            match(input,LISTOF,FOLLOW_LISTOF_in_compoundType153); 
 
-            match(input,LSPAR,FOLLOW_LSPAR_in_compoundType157); 
+            match(input,LSPAR,FOLLOW_LSPAR_in_compoundType155); 
 
-            pushFollow(FOLLOW_primitiveType_in_compoundType161);
+            pushFollow(FOLLOW_primitiveType_in_compoundType159);
             t=primitiveType();
 
             state._fsp--;
 
 
-            match(input,RSPAR,FOLLOW_RSPAR_in_compoundType163); 
+            match(input,RSPAR,FOLLOW_RSPAR_in_compoundType161); 
 
             }
 
@@ -379,12 +374,12 @@ public class FunctionalLanguageParser extends Parser {
 
     public static class command_return extends ParserRuleReturnScope {
         public String code;
-        public Checker typecheck;
+        public Node node;
     };
 
 
     // $ANTLR start "command"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:71:1: command returns [String code, Checker typecheck] : ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:66:1: command returns [String code, Node node] : ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr );
     public final FunctionalLanguageParser.command_return command() throws RecognitionException {
         FunctionalLanguageParser.command_return retval = new FunctionalLanguageParser.command_return();
         retval.start = input.LT(1);
@@ -399,7 +394,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:2: ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:67:2: ( DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr ) | PRINT e= expr )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -418,19 +413,19 @@ public class FunctionalLanguageParser extends Parser {
             }
             switch (alt7) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:72:4: DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:67:4: DEF t= type i= ID ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
                     {
-                    match(input,DEF,FOLLOW_DEF_in_command184); 
+                    match(input,DEF,FOLLOW_DEF_in_command182); 
 
-                    pushFollow(FOLLOW_type_in_command188);
+                    pushFollow(FOLLOW_type_in_command186);
                     t=type();
 
                     state._fsp--;
 
 
-                    i=(Token)match(input,ID,FOLLOW_ID_in_command192); 
+                    i=(Token)match(input,ID,FOLLOW_ID_in_command190); 
 
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:73:12: ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:12: ( ASS e= expr | LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -449,34 +444,31 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     switch (alt6) {
                         case 1 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:73:14: ASS e= expr
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:68:14: ASS e= expr
                             {
-                            match(input,ASS,FOLLOW_ASS_in_command207); 
+                            match(input,ASS,FOLLOW_ASS_in_command205); 
 
-                            pushFollow(FOLLOW_expr_in_command211);
+                            pushFollow(FOLLOW_expr_in_command209);
                             e=expr();
 
                             state._fsp--;
 
 
 
-                                      	
                                         symTable.put((i!=null?i.getText():null),new Integer(staticData));
                                         typeTable.put((i!=null?i.getText():null), t);
                                         retval.code = (e!=null?e.code:null)+"\tpush "+(staticData++)+"\n"+"\tsw\n";
-                                        
-                                        retval.typecheck = new ExprAssignmentChecker(t , (e!=null?e.typecheck:null));
-                                        
+                                        retval.node = new ExprAssignmentNode(t , (e!=null?e.node:null));
                                         
 
                             }
                             break;
                         case 2 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:84:14: LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:76:14: LPAR (t= type j= ID ( COMMA t= type k= ID )* )? RPAR ASS e= expr
                             {
-                            match(input,LPAR,FOLLOW_LPAR_in_command253); 
+                            match(input,LPAR,FOLLOW_LPAR_in_command251); 
 
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:84:19: (t= type j= ID ( COMMA t= type k= ID )* )?
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:76:19: (t= type j= ID ( COMMA t= type k= ID )* )?
                             int alt5=2;
                             int LA5_0 = input.LA(1);
 
@@ -485,34 +477,30 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             switch (alt5) {
                                 case 1 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:85:13: t= type j= ID ( COMMA t= type k= ID )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:77:13: t= type j= ID ( COMMA t= type k= ID )*
                                     {
 
-                                               	
                                                	// save func return values
                                                	functionReturnValues.put((i!=null?i.getText():null), t);
                                                	
-                                               	
 
-                                    pushFollow(FOLLOW_type_in_command299);
+                                    pushFollow(FOLLOW_type_in_command297);
                                     t=type();
 
                                     state._fsp--;
 
 
-                                    j=(Token)match(input,ID,FOLLOW_ID_in_command315); 
+                                    j=(Token)match(input,ID,FOLLOW_ID_in_command313); 
 
 
                                                 localSymTable.put((j!=null?j.getText():null),new Integer(parameterCounter++));
-                                      
                                                 localTypeTable.put((j!=null?j.getText():null),t);
                                                 
                                                 //  save first param type
-                                           	parametersTypeList.add(t);
-                                                
+                                           	parametersTypeList.add(t);           
                                                 
 
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:103:13: ( COMMA t= type k= ID )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:91:13: ( COMMA t= type k= ID )*
                                     loop4:
                                     do {
                                         int alt4=2;
@@ -525,25 +513,22 @@ public class FunctionalLanguageParser extends Parser {
 
                                         switch (alt4) {
                                     	case 1 :
-                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:103:14: COMMA t= type k= ID
+                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:91:14: COMMA t= type k= ID
                                     	    {
-                                    	    match(input,COMMA,FOLLOW_COMMA_in_command345); 
+                                    	    match(input,COMMA,FOLLOW_COMMA_in_command343); 
 
-                                    	    pushFollow(FOLLOW_type_in_command349);
+                                    	    pushFollow(FOLLOW_type_in_command347);
                                     	    t=type();
 
                                     	    state._fsp--;
 
 
-                                    	    k=(Token)match(input,ID,FOLLOW_ID_in_command353); 
+                                    	    k=(Token)match(input,ID,FOLLOW_ID_in_command351); 
 
 
                                     	                localSymTable.put((k!=null?k.getText():null),new Integer(parameterCounter++));
-                                    	           
                                     	                localTypeTable.put((k!=null?k.getText():null), t);
-                                    	                
                                     	           	parametersTypeList.add(t);
-                                    	                
                                     	                
 
                                     	    }
@@ -561,22 +546,17 @@ public class FunctionalLanguageParser extends Parser {
                             }
 
 
-                            match(input,RPAR,FOLLOW_RPAR_in_command388); 
+                            match(input,RPAR,FOLLOW_RPAR_in_command386); 
 
 
                                         	// save parameters type list
-                                        	functionParametersTypeTable.put((i!=null?i.getText():null), parametersTypeList);
-                                        	
-                                        	System.out.println("saved functionParametersTypeTable id: "+(i!=null?i.getText():null));
-                                        	System.out.println("saved functionParametersTypeTable size: "+parametersTypeList.size());
-                                        	System.out.println("saved functionParametersTypeTable: "+parametersTypeList.toString());
-                                        	
+                                        	functionParametersTypeTable.put((i!=null?i.getText():null), parametersTypeList);            	
                                         	parametersTypeList = new LinkedList<Type>();
                                         
 
-                            match(input,ASS,FOLLOW_ASS_in_command417); 
+                            match(input,ASS,FOLLOW_ASS_in_command415); 
 
-                            pushFollow(FOLLOW_expr_in_command421);
+                            pushFollow(FOLLOW_expr_in_command419);
                             e=expr();
 
                             state._fsp--;
@@ -602,9 +582,7 @@ public class FunctionalLanguageParser extends Parser {
                                         localSymTable=new HashMap();
                                         
                                         localTypeTable = new HashMap();
-                                        
-                                        retval.typecheck = new ExprChecker((e!=null?e.typecheck:null));
-                                                   
+                                        retval.node = new ExprNode((e!=null?e.node:null));
                                      	
 
                             }
@@ -616,22 +594,19 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:149:12: PRINT e= expr
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:127:12: PRINT e= expr
                     {
-                    match(input,PRINT,FOLLOW_PRINT_in_command463); 
+                    match(input,PRINT,FOLLOW_PRINT_in_command461); 
 
-                    pushFollow(FOLLOW_expr_in_command467);
+                    pushFollow(FOLLOW_expr_in_command465);
                     e=expr();
 
                     state._fsp--;
 
 
 
-                            	
                             	retval.code = (e!=null?e.code:null)+"\tprint\n";
-                            	
-                            	retval.typecheck = new PrintChecker((e!=null?e.typecheck:null));
-                            	
+                            	retval.node = new PrintNode((e!=null?e.node:null));
                             	
 
                     }
@@ -657,12 +632,12 @@ public class FunctionalLanguageParser extends Parser {
 
     public static class expr_return extends ParserRuleReturnScope {
         public String code;
-        public Checker typecheck;
+        public Node node;
     };
 
 
     // $ANTLR start "expr"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:160:1: expr returns [String code, Checker typecheck] : t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* ;
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:134:1: expr returns [String code, Node node] : t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* ;
     public final FunctionalLanguageParser.expr_return expr() throws RecognitionException {
         FunctionalLanguageParser.expr_return retval = new FunctionalLanguageParser.expr_return();
         retval.start = input.LT(1);
@@ -674,23 +649,21 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:161:2: (t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:161:4: t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:135:2: (t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )* )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:135:4: t= term ( PLUS t2= term | MINUS t2= term | OR t2= term )*
             {
-            pushFollow(FOLLOW_term_in_expr526);
+            pushFollow(FOLLOW_term_in_expr514);
             t=term();
 
             state._fsp--;
 
 
 
-            	
             	retval.code = (t!=null?t.code:null);
-            	retval.typecheck = new TermChecker((t!=null?t.typecheck:null));
-            	
+            	retval.node = new TermNode((t!=null?t.node:null));
             	
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:169:12: ( PLUS t2= term | MINUS t2= term | OR t2= term )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:141:12: ( PLUS t2= term | MINUS t2= term | OR t2= term )*
             loop8:
             do {
                 int alt8=4;
@@ -715,51 +688,47 @@ public class FunctionalLanguageParser extends Parser {
 
                 switch (alt8) {
             	case 1 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:169:14: PLUS t2= term
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:141:14: PLUS t2= term
             	    {
-            	    match(input,PLUS,FOLLOW_PLUS_in_expr547); 
+            	    match(input,PLUS,FOLLOW_PLUS_in_expr535); 
 
-            	    pushFollow(FOLLOW_term_in_expr551);
+            	    pushFollow(FOLLOW_term_in_expr539);
             	    t2=term();
 
             	    state._fsp--;
 
 
 
-            	              	
             	              	retval.code+=(t2!=null?t2.code:null)+"\tadd\n";
-            	              	retval.typecheck = new PlusChecker(retval.typecheck, (t2!=null?t2.typecheck:null));
-            	              	
+            	              	retval.node = new PlusNode(retval.node, (t2!=null?t2.node:null));
             	              	
 
             	    }
             	    break;
             	case 2 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:178:14: MINUS t2= term
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:147:14: MINUS t2= term
             	    {
-            	    match(input,MINUS,FOLLOW_MINUS_in_expr604); 
+            	    match(input,MINUS,FOLLOW_MINUS_in_expr580); 
 
-            	    pushFollow(FOLLOW_term_in_expr608);
+            	    pushFollow(FOLLOW_term_in_expr584);
             	    t2=term();
 
             	    state._fsp--;
 
 
 
-            	              	
             	              	retval.code =(t2!=null?t2.code:null)+retval.code+"\tsub\n";
-            	              	retval.typecheck = new MinusChecker(retval.typecheck, (t2!=null?t2.typecheck:null));
-            	              	
+            	              	retval.node = new MinusNode(retval.node, (t2!=null?t2.node:null));
             	              	
 
             	    }
             	    break;
             	case 3 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:185:14: OR t2= term
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:152:14: OR t2= term
             	    {
-            	    match(input,OR,FOLLOW_OR_in_expr637); 
+            	    match(input,OR,FOLLOW_OR_in_expr613); 
 
-            	    pushFollow(FOLLOW_term_in_expr641);
+            	    pushFollow(FOLLOW_term_in_expr617);
             	    t2=term();
 
             	    state._fsp--;
@@ -778,8 +747,7 @@ public class FunctionalLanguageParser extends Parser {
             	                	     "\tpush "+TRUEVALUE+"\n"+
             	                	     "label"+(labelCounter-1)+":\n";
             	                	     
-            	            	retval.typecheck = new OrChecker(retval.typecheck, (t2!=null?t2.typecheck:null));    	    
-            	                	    
+            	            	retval.node = new OrNode(retval.node, (t2!=null?t2.node:null));    	    	    
             	           	
 
             	    }
@@ -812,12 +780,12 @@ public class FunctionalLanguageParser extends Parser {
 
     public static class term_return extends ParserRuleReturnScope {
         public String code;
-        public Checker typecheck;
+        public Node node;
     };
 
 
     // $ANTLR start "term"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:205:1: term returns [String code, Checker typecheck] : f= factor ( AND f2= factor )* ;
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:171:1: term returns [String code, Node node] : f= factor ( AND f2= factor )* ;
     public final FunctionalLanguageParser.term_return term() throws RecognitionException {
         FunctionalLanguageParser.term_return retval = new FunctionalLanguageParser.term_return();
         retval.start = input.LT(1);
@@ -829,10 +797,10 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:206:10: (f= factor ( AND f2= factor )* )
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:206:12: f= factor ( AND f2= factor )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:172:10: (f= factor ( AND f2= factor )* )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:172:12: f= factor ( AND f2= factor )*
             {
-            pushFollow(FOLLOW_factor_in_term731);
+            pushFollow(FOLLOW_factor_in_term707);
             f=factor();
 
             state._fsp--;
@@ -840,11 +808,10 @@ public class FunctionalLanguageParser extends Parser {
 
 
                     	retval.code =(f!=null?f.code:null);
-                    	retval.typecheck = new FactorChecker((f!=null?f.typecheck:null));
-                    	
+                    	retval.node = new FactorNode((f!=null?f.node:null));
                     	
 
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:212:12: ( AND f2= factor )*
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:177:12: ( AND f2= factor )*
             loop9:
             do {
                 int alt9=2;
@@ -857,11 +824,11 @@ public class FunctionalLanguageParser extends Parser {
 
                 switch (alt9) {
             	case 1 :
-            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:212:13: AND f2= factor
+            	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:177:13: AND f2= factor
             	    {
-            	    match(input,AND,FOLLOW_AND_in_term758); 
+            	    match(input,AND,FOLLOW_AND_in_term734); 
 
-            	    pushFollow(FOLLOW_factor_in_term762);
+            	    pushFollow(FOLLOW_factor_in_term738);
             	    f2=factor();
 
             	    state._fsp--;
@@ -880,8 +847,7 @@ public class FunctionalLanguageParser extends Parser {
             	                	        "\tpush "+FALSEVALUE+"\n"+
             	                	        "label"+(labelCounter-1)+":\n";
             	    	        
-            	           	retval.typecheck = new AndChecker(retval.typecheck, (f2!=null?f2.typecheck:null));	
-            	                	        
+            	           	retval.node = new AndNode(retval.node, (f2!=null?f2.node:null));		        
             	           	
 
             	    }
@@ -914,12 +880,12 @@ public class FunctionalLanguageParser extends Parser {
 
     public static class factor_return extends ParserRuleReturnScope {
         public String code;
-        public Checker typecheck;
+        public Node node;
     };
 
 
     // $ANTLR start "factor"
-    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:232:1: factor returns [String code, Checker typecheck] : (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr );
+    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:196:1: factor returns [String code, Node node] : (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr );
     public final FunctionalLanguageParser.factor_return factor() throws RecognitionException {
         FunctionalLanguageParser.factor_return retval = new FunctionalLanguageParser.factor_return();
         retval.start = input.LT(1);
@@ -939,7 +905,7 @@ public class FunctionalLanguageParser extends Parser {
 
 
         try {
-            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:233:3: (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr )
+            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:197:3: (n= NUMBER | TRUE | FALSE | EMPTY | NOT e= expr | LSPAR e= expr COMMA f= expr RSPAR |i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR ) | LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR ) | IF e1= expr THEN e2= expr ELSE e3= expr )
             int alt15=9;
             switch ( input.LA(1) ) {
             case NUMBER:
@@ -997,47 +963,47 @@ public class FunctionalLanguageParser extends Parser {
 
             switch (alt15) {
                 case 1 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:233:5: n= NUMBER
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:197:5: n= NUMBER
                     {
-                    n=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_factor809); 
+                    n=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_factor785); 
 
-                    retval.code = "\tpush "+(n!=null?n.getText():null)+"\n"; retval.typecheck = new NumberChecker(); 
+                    retval.code = "\tpush "+(n!=null?n.getText():null)+"\n"; retval.node = new NumberNode(); 
 
                     }
                     break;
                 case 2 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:234:5: TRUE
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:198:5: TRUE
                     {
-                    match(input,TRUE,FOLLOW_TRUE_in_factor817); 
+                    match(input,TRUE,FOLLOW_TRUE_in_factor793); 
 
-                    retval.code = "\tpush "+TRUEVALUE+"\n"; retval.typecheck = new BoolChecker(); 
+                    retval.code = "\tpush "+TRUEVALUE+"\n"; retval.node = new BoolNode(); 
 
                     }
                     break;
                 case 3 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:235:5: FALSE
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:199:5: FALSE
                     {
-                    match(input,FALSE,FOLLOW_FALSE_in_factor825); 
+                    match(input,FALSE,FOLLOW_FALSE_in_factor801); 
 
-                    retval.code = "\tpush "+FALSEVALUE+"\n"; retval.typecheck = new BoolChecker(); 
+                    retval.code = "\tpush "+FALSEVALUE+"\n"; retval.node = new BoolNode(); 
 
                     }
                     break;
                 case 4 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:236:5: EMPTY
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:200:5: EMPTY
                     {
-                    match(input,EMPTY,FOLLOW_EMPTY_in_factor833); 
+                    match(input,EMPTY,FOLLOW_EMPTY_in_factor809); 
 
-                    retval.code = "\tpush "+EMPTYVALUE+"\n"; retval.typecheck = new ListChecker(null, null);  System.out.println("Creato EMPTY"); 
+                    retval.code = "\tpush "+EMPTYVALUE+"\n"; retval.node = new ListNode(null, null);  System.out.println("Creato EMPTY"); 
 
                     }
                     break;
                 case 5 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:237:5: NOT e= expr
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:201:5: NOT e= expr
                     {
-                    match(input,NOT,FOLLOW_NOT_in_factor841); 
+                    match(input,NOT,FOLLOW_NOT_in_factor817); 
 
-                    pushFollow(FOLLOW_expr_in_factor845);
+                    pushFollow(FOLLOW_expr_in_factor821);
                     e=expr();
 
                     state._fsp--;
@@ -1053,32 +1019,31 @@ public class FunctionalLanguageParser extends Parser {
                                 	   "\tpush "+FALSEVALUE+"\n"+
                                 	   "label"+(labelCounter-1)+":\n";
                                 	   
-                            	retval.typecheck = new NotChecker((e!=null?e.typecheck:null));
-                            	
+                            	retval.node = new NotNode((e!=null?e.node:null));
                              	
 
                     }
                     break;
                 case 6 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:251:12: LSPAR e= expr COMMA f= expr RSPAR
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:214:12: LSPAR e= expr COMMA f= expr RSPAR
                     {
-                    match(input,LSPAR,FOLLOW_LSPAR_in_factor862); 
+                    match(input,LSPAR,FOLLOW_LSPAR_in_factor838); 
 
-                    pushFollow(FOLLOW_expr_in_factor866);
+                    pushFollow(FOLLOW_expr_in_factor842);
                     e=expr();
 
                     state._fsp--;
 
 
-                    match(input,COMMA,FOLLOW_COMMA_in_factor868); 
+                    match(input,COMMA,FOLLOW_COMMA_in_factor844); 
 
-                    pushFollow(FOLLOW_expr_in_factor872);
+                    pushFollow(FOLLOW_expr_in_factor848);
                     f=expr();
 
                     state._fsp--;
 
 
-                    match(input,RSPAR,FOLLOW_RSPAR_in_factor874); 
+                    match(input,RSPAR,FOLLOW_RSPAR_in_factor850); 
 
 
                               	retval.code = (f!=null?f.code:null)+
@@ -1095,18 +1060,17 @@ public class FunctionalLanguageParser extends Parser {
                                        "\tadd\n"+
                                        "\tshp\n";
                                        
-                                       retval.typecheck = new ListChecker((e!=null?e.typecheck:null), (f!=null?f.typecheck:null));
-                                       
+                                       retval.node = new ListNode((e!=null?e.node:null), (f!=null?f.node:null));
                           	
 
                     }
                     break;
                 case 7 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:270:12: i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:232:12: i= ID (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
                     {
-                    i=(Token)match(input,ID,FOLLOW_ID_in_factor902); 
+                    i=(Token)match(input,ID,FOLLOW_ID_in_factor878); 
 
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:271:12: (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:233:12: (| LPAR (e= expr ( COMMA f= expr )* )? RPAR )
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1125,7 +1089,7 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     switch (alt12) {
                         case 1 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:272:12: 
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:234:12: 
                             {
 
                                       	Integer value = (Integer)localSymTable.get((i!=null?i.getText():null));
@@ -1145,12 +1109,12 @@ public class FunctionalLanguageParser extends Parser {
                                         	System.out.println("id :"+(i!=null?i.getText():null));
                                         	Type typeValue = (Type)typeTable.get((i!=null?i.getText():null));
                             		if(typeValue == null){
-                            			retval.typecheck = new ErrorChecker();
+                            			retval.node = new ErrorNode();
                             		}else{
-                            			retval.typecheck = new IdChecker(typeValue);
+                            			retval.node = new IdNode(typeValue);
                             		}
                                         } else {
-                            		retval.typecheck = new IdChecker(localTypeValue);
+                            		retval.node = new IdNode(localTypeValue);
                                    	}
                                    	
                                         
@@ -1158,18 +1122,16 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:299:14: LPAR (e= expr ( COMMA f= expr )* )? RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:261:14: LPAR (e= expr ( COMMA f= expr )* )? RPAR
                             {
-                            match(input,LPAR,FOLLOW_LPAR_in_factor945); 
+                            match(input,LPAR,FOLLOW_LPAR_in_factor921); 
 
 
                                       	retval.code = "";
-                                      	
-                                      	LinkedList<Checker> funcParametersTypeList = new LinkedList<Checker>();
-                                      	   	
+                                      	LinkedList<Node> funcParametersTypeList = new LinkedList<Node>();   	
                                       	
 
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:306:14: (e= expr ( COMMA f= expr )* )?
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:266:14: (e= expr ( COMMA f= expr )* )?
                             int alt11=2;
                             int LA11_0 = input.LA(1);
 
@@ -1178,9 +1140,9 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             switch (alt11) {
                                 case 1 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:306:15: e= expr ( COMMA f= expr )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:266:15: e= expr ( COMMA f= expr )*
                                     {
-                                    pushFollow(FOLLOW_expr_in_factor977);
+                                    pushFollow(FOLLOW_expr_in_factor953);
                                     e=expr();
 
                                     state._fsp--;
@@ -1188,13 +1150,10 @@ public class FunctionalLanguageParser extends Parser {
 
 
                                               	  retval.code = (e!=null?e.code:null);
-                                              	  
-                                          	  
-                                              	  funcParametersTypeList.add(new ExprChecker((e!=null?e.typecheck:null)));
-                                              	  
+                                              	  funcParametersTypeList.add(new ExprNode((e!=null?e.node:null)));
                                               	  
 
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:314:11: ( COMMA f= expr )*
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:271:11: ( COMMA f= expr )*
                                     loop10:
                                     do {
                                         int alt10=2;
@@ -1207,22 +1166,19 @@ public class FunctionalLanguageParser extends Parser {
 
                                         switch (alt10) {
                                     	case 1 :
-                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:314:12: COMMA f= expr
+                                    	    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:271:12: COMMA f= expr
                                     	    {
-                                    	    match(input,COMMA,FOLLOW_COMMA_in_factor1006); 
+                                    	    match(input,COMMA,FOLLOW_COMMA_in_factor982); 
 
-                                    	    pushFollow(FOLLOW_expr_in_factor1010);
+                                    	    pushFollow(FOLLOW_expr_in_factor986);
                                     	    f=expr();
 
                                     	    state._fsp--;
 
 
 
-                                    	           	  
                                     	           	  retval.code = (f!=null?f.code:null)+retval.code;
-                                    	           	  
-                                    	           	  funcParametersTypeList.add(new ExprChecker((f!=null?f.typecheck:null)));
-                                    	           	  
+                                    	           	  funcParametersTypeList.add(new ExprNode((f!=null?f.node:null)));
                                     	           	  
 
                                     	    }
@@ -1240,26 +1196,19 @@ public class FunctionalLanguageParser extends Parser {
                             }
 
 
-                            match(input,RPAR,FOLLOW_RPAR_in_factor1056); 
+                            match(input,RPAR,FOLLOW_RPAR_in_factor1032); 
 
 
                                           
                                           retval.code = "\tlfp\n"+retval.code+"\tjal "+(i!=null?i.getText():null)+"\n";
                                           
                                           LinkedList<Type> declaredParametersTypeList = (LinkedList<Type>) functionParametersTypeTable.get((i!=null?i.getText():null));
-                                          System.out.println("retrieved functionParametersTypeTable id: "+(i!=null?i.getText():null));
-                                          System.out.println("retrieved functionParametersTypeTable size: "+declaredParametersTypeList.size());
-                                          System.out.println("retrieved functionParametersTypeTable: "+declaredParametersTypeList.toString());
-                                          
                                           Type returnType =((Type)functionReturnValues.get((i!=null?i.getText():null)));
-                                          
                                           funcParametersTypeListOfList.add(funcParametersTypeList);
-                                          
-                                          retval.typecheck = new FuncChecker( returnType, funcParametersTypeList, declaredParametersTypeList);
+                                          retval.node = new FuncNode( returnType, funcParametersTypeList, declaredParametersTypeList);
                                           
                                           // empty
                                           funcParametersTypeListOfList.removeLastOccurrence(funcParametersTypeList);
-                                          
                                           
 
                             }
@@ -1271,17 +1220,17 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 8 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:344:12: LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:291:12: LPAR e= expr ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
                     {
-                    match(input,LPAR,FOLLOW_LPAR_in_factor1115); 
+                    match(input,LPAR,FOLLOW_LPAR_in_factor1091); 
 
-                    pushFollow(FOLLOW_expr_in_factor1119);
+                    pushFollow(FOLLOW_expr_in_factor1095);
                     e=expr();
 
                     state._fsp--;
 
 
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:345:12: ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:292:12: ( RPAR | EQUAL e2= expr RPAR | LESS e2= expr RPAR | GREATER e2= expr RPAR | DOT ( FIRST | REST ) RPAR )
                     int alt14=5;
                     switch ( input.LA(1) ) {
                     case RPAR:
@@ -1319,29 +1268,29 @@ public class FunctionalLanguageParser extends Parser {
 
                     switch (alt14) {
                         case 1 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:345:14: RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:292:14: RPAR
                             {
-                            match(input,RPAR,FOLLOW_RPAR_in_factor1135); 
+                            match(input,RPAR,FOLLOW_RPAR_in_factor1111); 
 
 
                                       	retval.code = (e!=null?e.code:null);
-                                      	retval.typecheck = (e!=null?e.typecheck:null);
+                                      	retval.node = (e!=null?e.node:null);
                                       	
 
                             }
                             break;
                         case 2 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:350:14: EQUAL e2= expr RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:297:14: EQUAL e2= expr RPAR
                             {
-                            match(input,EQUAL,FOLLOW_EQUAL_in_factor1164); 
+                            match(input,EQUAL,FOLLOW_EQUAL_in_factor1140); 
 
-                            pushFollow(FOLLOW_expr_in_factor1168);
+                            pushFollow(FOLLOW_expr_in_factor1144);
                             e2=expr();
 
                             state._fsp--;
 
 
-                            match(input,RPAR,FOLLOW_RPAR_in_factor1170); 
+                            match(input,RPAR,FOLLOW_RPAR_in_factor1146); 
 
 
                                         retval.code = (e2!=null?e2.code:null)+(e!=null?e.code:null)+
@@ -1352,24 +1301,24 @@ public class FunctionalLanguageParser extends Parser {
                                       	   "\tpush "+TRUEVALUE+"\n"+
                                       	   "label"+(labelCounter-1)+":\n";
                                       	   
-                                    	retval.typecheck = new EqualChecker((e!=null?e.typecheck:null), (e2!=null?e2.typecheck:null));
+                                    	retval.node = new EqualNode((e!=null?e.node:null), (e2!=null?e2.node:null));
                                     	
                                      	
 
                             }
                             break;
                         case 3 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:363:14: LESS e2= expr RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:310:14: LESS e2= expr RPAR
                             {
-                            match(input,LESS,FOLLOW_LESS_in_factor1200); 
+                            match(input,LESS,FOLLOW_LESS_in_factor1176); 
 
-                            pushFollow(FOLLOW_expr_in_factor1204);
+                            pushFollow(FOLLOW_expr_in_factor1180);
                             e2=expr();
 
                             state._fsp--;
 
 
-                            match(input,RPAR,FOLLOW_RPAR_in_factor1206); 
+                            match(input,RPAR,FOLLOW_RPAR_in_factor1182); 
 
 
                                         retval.code = (e2!=null?e2.code:null)+(e!=null?e.code:null)+
@@ -1380,24 +1329,23 @@ public class FunctionalLanguageParser extends Parser {
                                       	   "\tpush "+TRUEVALUE+"\n"+
                                       	   "label"+(labelCounter-1)+":\n";
                                       
-                                   	retval.typecheck = new LessChecker((e!=null?e.typecheck:null), (e2!=null?e2.typecheck:null));
-                                   	
+                                   	retval.node = new LessNode((e!=null?e.node:null), (e2!=null?e2.node:null));
                                     	
 
                             }
                             break;
                         case 4 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:376:14: GREATER e2= expr RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:322:14: GREATER e2= expr RPAR
                             {
-                            match(input,GREATER,FOLLOW_GREATER_in_factor1239); 
+                            match(input,GREATER,FOLLOW_GREATER_in_factor1215); 
 
-                            pushFollow(FOLLOW_expr_in_factor1243);
+                            pushFollow(FOLLOW_expr_in_factor1219);
                             e2=expr();
 
                             state._fsp--;
 
 
-                            match(input,RPAR,FOLLOW_RPAR_in_factor1245); 
+                            match(input,RPAR,FOLLOW_RPAR_in_factor1221); 
 
 
                                         retval.code = (e!=null?e.code:null)+(e2!=null?e2.code:null)+
@@ -1408,24 +1356,17 @@ public class FunctionalLanguageParser extends Parser {
                                       	   "\tpush "+TRUEVALUE+"\n"+
                                       	   "label"+(labelCounter-1)+":\n";
                                       	   
-                                    	retval.typecheck = new GreaterChecker((e!=null?e.typecheck:null), (e2!=null?e2.typecheck:null));
-                                      	   
+                                    	retval.node = new GreaterNode((e!=null?e.node:null), (e2!=null?e2.node:null));
                                    	
 
                             }
                             break;
                         case 5 :
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:389:12: DOT ( FIRST | REST ) RPAR
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:334:12: DOT ( FIRST | REST ) RPAR
                             {
-                            match(input,DOT,FOLLOW_DOT_in_factor1277); 
+                            match(input,DOT,FOLLOW_DOT_in_factor1253); 
 
-
-                                    	
-
-                                    	
-                                    	
-
-                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:397:13: ( FIRST | REST )
+                            // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:335:13: ( FIRST | REST )
                             int alt13=2;
                             int LA13_0 = input.LA(1);
 
@@ -1444,29 +1385,28 @@ public class FunctionalLanguageParser extends Parser {
                             }
                             switch (alt13) {
                                 case 1 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:397:15: FIRST
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:335:15: FIRST
                                     {
-                                    match(input,FIRST,FOLLOW_FIRST_in_factor1325); 
+                                    match(input,FIRST,FOLLOW_FIRST_in_factor1278); 
 
 
                                                 
                                                 retval.code = (e!=null?e.code:null)+"\tlw\n";
                                                 
-                                                ExprChecker checker = new ExprChecker((e!=null?e.typecheck:null));
+                                                ExprNode checker = new ExprNode((e!=null?e.node:null));
                                                 if(!checker.isListType()){
-                                                	retval.typecheck = new ErrorChecker();
+                                                	retval.node = new ErrorNode();
                                                 }else{
-                                                	retval.typecheck = new FirstChecker((e!=null?e.typecheck:null));
+                                                	retval.node = new FirstNode((e!=null?e.node:null));
                                                 }
-                                                
                                                 
 
                                     }
                                     break;
                                 case 2 :
-                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:410:15: REST
+                                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:347:15: REST
                                     {
-                                    match(input,REST,FOLLOW_REST_in_factor1357); 
+                                    match(input,REST,FOLLOW_REST_in_factor1310); 
 
 
                                                 retval.code = (e!=null?e.code:null)+
@@ -1474,13 +1414,12 @@ public class FunctionalLanguageParser extends Parser {
                                                                  "\tadd\n"+
                                                                  "\tlw\n";    
                                                                  
-                                           	ExprChecker checker = new ExprChecker((e!=null?e.typecheck:null));
+                                           	ExprNode checker = new ExprNode((e!=null?e.node:null));
                                               	 if(!checker.isListType()){
-                                                	retval.typecheck = new ErrorChecker();
+                                                	retval.node = new ErrorNode();
                                                 }else{
-                                                	retval.typecheck =checker;
-                                                }           
-                                                          
+                                                	retval.node =checker;
+                                                }  
                                              	
 
                                     }
@@ -1489,7 +1428,7 @@ public class FunctionalLanguageParser extends Parser {
                             }
 
 
-                            match(input,RPAR,FOLLOW_RPAR_in_factor1387); 
+                            match(input,RPAR,FOLLOW_RPAR_in_factor1340); 
 
                             }
                             break;
@@ -1500,27 +1439,27 @@ public class FunctionalLanguageParser extends Parser {
                     }
                     break;
                 case 9 :
-                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:427:6: IF e1= expr THEN e2= expr ELSE e3= expr
+                    // /Users/ale/Dropbox/Dev/LPMCProject/ANTLR/FunctionalLanguage.g:363:6: IF e1= expr THEN e2= expr ELSE e3= expr
                     {
-                    match(input,IF,FOLLOW_IF_in_factor1419); 
+                    match(input,IF,FOLLOW_IF_in_factor1372); 
 
-                    pushFollow(FOLLOW_expr_in_factor1423);
+                    pushFollow(FOLLOW_expr_in_factor1376);
                     e1=expr();
 
                     state._fsp--;
 
 
-                    match(input,THEN,FOLLOW_THEN_in_factor1425); 
+                    match(input,THEN,FOLLOW_THEN_in_factor1378); 
 
-                    pushFollow(FOLLOW_expr_in_factor1429);
+                    pushFollow(FOLLOW_expr_in_factor1382);
                     e2=expr();
 
                     state._fsp--;
 
 
-                    match(input,ELSE,FOLLOW_ELSE_in_factor1431); 
+                    match(input,ELSE,FOLLOW_ELSE_in_factor1384); 
 
-                    pushFollow(FOLLOW_expr_in_factor1435);
+                    pushFollow(FOLLOW_expr_in_factor1388);
                     e3=expr();
 
                     state._fsp--;
@@ -1536,8 +1475,7 @@ public class FunctionalLanguageParser extends Parser {
                               	   (e2!=null?e2.code:null)+
                               	   "label"+(labelCounter-1)+":\n";
                             
-                            	retval.typecheck = new IfChecker((e1!=null?e1.typecheck:null), (e2!=null?e2.typecheck:null), (e3!=null?e3.typecheck:null));  	   
-                              	   
+                            	retval.node = new IfNode((e1!=null?e1.node:null), (e2!=null?e2.node:null), (e3!=null?e3.node:null));
                           	
 
                     }
@@ -1567,80 +1505,80 @@ public class FunctionalLanguageParser extends Parser {
 
     public static final BitSet FOLLOW_command_in_prog39 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_SEMIC_in_prog41 = new BitSet(new long[]{0x0000000020000202L});
-    public static final BitSet FOLLOW_command_in_prog70 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_SEMIC_in_prog72 = new BitSet(new long[]{0x0000000020000202L});
-    public static final BitSet FOLLOW_primitiveType_in_type103 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_compoundType_in_type112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INT_in_primitiveType128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_BOOL_in_primitiveType136 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LISTOF_in_compoundType155 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_LSPAR_in_compoundType157 = new BitSet(new long[]{0x0000000000080040L});
-    public static final BitSet FOLLOW_primitiveType_in_compoundType161 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_RSPAR_in_compoundType163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DEF_in_command184 = new BitSet(new long[]{0x0000000000280040L});
-    public static final BitSet FOLLOW_type_in_command188 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_ID_in_command192 = new BitSet(new long[]{0x0000000000400020L});
-    public static final BitSet FOLLOW_ASS_in_command207 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_command211 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LPAR_in_command253 = new BitSet(new long[]{0x0000000080280040L});
-    public static final BitSet FOLLOW_type_in_command299 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_ID_in_command315 = new BitSet(new long[]{0x0000000080000080L});
-    public static final BitSet FOLLOW_COMMA_in_command345 = new BitSet(new long[]{0x0000000000280040L});
-    public static final BitSet FOLLOW_type_in_command349 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_ID_in_command353 = new BitSet(new long[]{0x0000000080000080L});
-    public static final BitSet FOLLOW_RPAR_in_command388 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ASS_in_command417 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_command421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PRINT_in_command463 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_command467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_term_in_expr526 = new BitSet(new long[]{0x0000000019000002L});
-    public static final BitSet FOLLOW_PLUS_in_expr547 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_term_in_expr551 = new BitSet(new long[]{0x0000000019000002L});
-    public static final BitSet FOLLOW_MINUS_in_expr604 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_term_in_expr608 = new BitSet(new long[]{0x0000000019000002L});
-    public static final BitSet FOLLOW_OR_in_expr637 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_term_in_expr641 = new BitSet(new long[]{0x0000000019000002L});
-    public static final BitSet FOLLOW_factor_in_term731 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_AND_in_term758 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_factor_in_term762 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_NUMBER_in_factor809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TRUE_in_factor817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FALSE_in_factor825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EMPTY_in_factor833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NOT_in_factor841 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LSPAR_in_factor862 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor866 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_COMMA_in_factor868 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor872 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_RSPAR_in_factor874 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_factor902 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_LPAR_in_factor945 = new BitSet(new long[]{0x0000000886C65000L});
-    public static final BitSet FOLLOW_expr_in_factor977 = new BitSet(new long[]{0x0000000080000080L});
-    public static final BitSet FOLLOW_COMMA_in_factor1006 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1010 = new BitSet(new long[]{0x0000000080000080L});
-    public static final BitSet FOLLOW_RPAR_in_factor1056 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LPAR_in_factor1115 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1119 = new BitSet(new long[]{0x0000000080112400L});
-    public static final BitSet FOLLOW_RPAR_in_factor1135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EQUAL_in_factor1164 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1168 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_RPAR_in_factor1170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LESS_in_factor1200 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1204 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_RPAR_in_factor1206 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_GREATER_in_factor1239 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1243 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_RPAR_in_factor1245 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DOT_in_factor1277 = new BitSet(new long[]{0x0000000040008000L});
-    public static final BitSet FOLLOW_FIRST_in_factor1325 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_REST_in_factor1357 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_RPAR_in_factor1387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_factor1419 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1423 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_THEN_in_factor1425 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1429 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_ELSE_in_factor1431 = new BitSet(new long[]{0x0000000806C65000L});
-    public static final BitSet FOLLOW_expr_in_factor1435 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_command_in_prog69 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_SEMIC_in_prog71 = new BitSet(new long[]{0x0000000020000202L});
+    public static final BitSet FOLLOW_primitiveType_in_type101 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_compoundType_in_type110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INT_in_primitiveType126 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_BOOL_in_primitiveType134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LISTOF_in_compoundType153 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_LSPAR_in_compoundType155 = new BitSet(new long[]{0x0000000000080040L});
+    public static final BitSet FOLLOW_primitiveType_in_compoundType159 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_RSPAR_in_compoundType161 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DEF_in_command182 = new BitSet(new long[]{0x0000000000280040L});
+    public static final BitSet FOLLOW_type_in_command186 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_ID_in_command190 = new BitSet(new long[]{0x0000000000400020L});
+    public static final BitSet FOLLOW_ASS_in_command205 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_command209 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LPAR_in_command251 = new BitSet(new long[]{0x0000000080280040L});
+    public static final BitSet FOLLOW_type_in_command297 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_ID_in_command313 = new BitSet(new long[]{0x0000000080000080L});
+    public static final BitSet FOLLOW_COMMA_in_command343 = new BitSet(new long[]{0x0000000000280040L});
+    public static final BitSet FOLLOW_type_in_command347 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_ID_in_command351 = new BitSet(new long[]{0x0000000080000080L});
+    public static final BitSet FOLLOW_RPAR_in_command386 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ASS_in_command415 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_command419 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PRINT_in_command461 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_command465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_term_in_expr514 = new BitSet(new long[]{0x0000000019000002L});
+    public static final BitSet FOLLOW_PLUS_in_expr535 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_term_in_expr539 = new BitSet(new long[]{0x0000000019000002L});
+    public static final BitSet FOLLOW_MINUS_in_expr580 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_term_in_expr584 = new BitSet(new long[]{0x0000000019000002L});
+    public static final BitSet FOLLOW_OR_in_expr613 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_term_in_expr617 = new BitSet(new long[]{0x0000000019000002L});
+    public static final BitSet FOLLOW_factor_in_term707 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_AND_in_term734 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_factor_in_term738 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_NUMBER_in_factor785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TRUE_in_factor793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FALSE_in_factor801 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_EMPTY_in_factor809 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NOT_in_factor817 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LSPAR_in_factor838 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor842 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_COMMA_in_factor844 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor848 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_RSPAR_in_factor850 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_factor878 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_LPAR_in_factor921 = new BitSet(new long[]{0x0000000886C65000L});
+    public static final BitSet FOLLOW_expr_in_factor953 = new BitSet(new long[]{0x0000000080000080L});
+    public static final BitSet FOLLOW_COMMA_in_factor982 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor986 = new BitSet(new long[]{0x0000000080000080L});
+    public static final BitSet FOLLOW_RPAR_in_factor1032 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LPAR_in_factor1091 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor1095 = new BitSet(new long[]{0x0000000080112400L});
+    public static final BitSet FOLLOW_RPAR_in_factor1111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_EQUAL_in_factor1140 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor1144 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_RPAR_in_factor1146 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LESS_in_factor1176 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor1180 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_RPAR_in_factor1182 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_GREATER_in_factor1215 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor1219 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_RPAR_in_factor1221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DOT_in_factor1253 = new BitSet(new long[]{0x0000000040008000L});
+    public static final BitSet FOLLOW_FIRST_in_factor1278 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_REST_in_factor1310 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_RPAR_in_factor1340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IF_in_factor1372 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor1376 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_THEN_in_factor1378 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor1382 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_ELSE_in_factor1384 = new BitSet(new long[]{0x0000000806C65000L});
+    public static final BitSet FOLLOW_expr_in_factor1388 = new BitSet(new long[]{0x0000000000000002L});
 
 }

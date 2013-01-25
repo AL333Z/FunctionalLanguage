@@ -3,11 +3,7 @@ def INT sommatutti( LIST-OF[INT] l) =
                else (l.first)+sommatutti( (l.rest) );  
 
 print sommatutti([5,[3,empty]]);
-
-
-def INT pippo = (5-3+2+3);
-print pippo;
-
+print (5-3+2+3);
 
 /*
  *	Simple var assignment and print
@@ -51,11 +47,9 @@ print prova1;
 def INT testFn(INT num, BOOL cond) =
 if(cond == true) then num else 0;
 
-def INT testFnFalse = testFn(5, false);
-print testFnFalse;
+print testFn(5, false);
+print testFn(5, true);
 
-def INT testFnTrue = testFn(5, true);
-print testFnTrue;
 
 /*
  * List declarations
@@ -65,15 +59,3 @@ def LIST-OF[BOOL] lista2 = [true,[false,empty]];
 def LIST-OF[INT] lista3 = [1,[5,[3,empty]]];
 def LIST-OF[BOOL] lista4 = [false,[true,[false,empty]]];
 def LIST-OF[BOOL] lista5 = [false,empty];
-
-
-/*
- *	Errors
- */
-
-/* Type mismatch Error
-*/
-/*
-def INT err = state;
-print err;
-*/
