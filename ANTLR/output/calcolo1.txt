@@ -16,7 +16,7 @@ print num;
 print state;
 
 /*
- * Fn INT -> BOOL
+ * Fn INT -> INT
  */
 
 def INT double(INT number) =
