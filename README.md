@@ -1,7 +1,7 @@
 FunctionalLanguage
 ==================
 
-Implementation of a (really simple) functional language with a Stack Virtual Machine, using ANTLR.
+Implementation of a (really simple) Functional Language with a Stack Virtual Machine, using ANTLR.
 This language is a case-study for the course "Linguaggi di programmazione e modelli computazionali", Ingegneria e Scienze Informatiche LM.
 
 ## General
