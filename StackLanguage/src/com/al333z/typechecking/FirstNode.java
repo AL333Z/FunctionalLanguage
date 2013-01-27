@@ -9,7 +9,7 @@ public class FirstNode implements Node {
 	protected Node firstChecker;
 	
 	public FirstNode(Node firstChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.firstChecker = firstChecker;
 	}
 	

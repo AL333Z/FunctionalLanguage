@@ -8,7 +8,7 @@ public class FactorNode implements Node {
 	protected Node factorChecker;
 	
 	public FactorNode(Node factorChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.factorChecker = factorChecker;
 	}
 	

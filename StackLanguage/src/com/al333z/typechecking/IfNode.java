@@ -12,7 +12,7 @@ public class IfNode implements Node {
 	protected Node elseExprChecker;
 	
 	public IfNode(Node condExprChecker, Node thenExprChecker, Node elseExprChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.condExprChecker = condExprChecker;
 		this.thenExprChecker = thenExprChecker;
 		this.elseExprChecker = elseExprChecker;

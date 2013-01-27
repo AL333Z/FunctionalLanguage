@@ -8,7 +8,7 @@ public class ExprNode implements Node {
 	protected Node exprChecker;
 	
 	public ExprNode(Node exprChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.exprChecker = exprChecker;
 	}
 	

@@ -7,7 +7,7 @@ public class CommandNode implements Node {
 	protected Node commandChecker;
 	
 	public CommandNode(Node commandChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.commandChecker = commandChecker;
 	}
 	

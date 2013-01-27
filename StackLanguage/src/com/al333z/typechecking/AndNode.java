@@ -10,7 +10,7 @@ public class AndNode implements Node {
 	protected Node rightFactorChecker;
 	
 	public AndNode(Node leftFactorChecker, Node rightFactorChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.leftFactorChecker = leftFactorChecker;
 		this.rightFactorChecker = rightFactorChecker;
 	}

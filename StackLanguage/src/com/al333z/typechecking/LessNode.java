@@ -11,7 +11,7 @@ public class LessNode implements Node {
 	protected Node rightExprChecker;
 	
 	public LessNode(Node leftExprChecker, Node rightExprChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.leftExprChecker = leftExprChecker;
 		this.rightExprChecker = rightExprChecker;
 	}

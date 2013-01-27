@@ -8,7 +8,7 @@ public class IdNode implements Node {
 	protected Type idType;
 	
 	public IdNode(Type typeValue) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.idType = typeValue;
 	}
 	

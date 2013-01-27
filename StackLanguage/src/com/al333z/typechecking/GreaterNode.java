@@ -11,7 +11,7 @@ public class GreaterNode implements Node {
 	protected Node rightExprChecker;
 	
 	public GreaterNode(Node leftExprChecker, Node rightExprChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.leftExprChecker = leftExprChecker;
 		this.rightExprChecker = rightExprChecker;
 	}

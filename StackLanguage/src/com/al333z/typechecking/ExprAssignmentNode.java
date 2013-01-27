@@ -10,7 +10,7 @@ public class ExprAssignmentNode implements Node {
 	protected Node exprChecker;
 	
 	public ExprAssignmentNode(Type type, Node exprChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.type = type;
 		this.exprChecker = exprChecker;
 	}

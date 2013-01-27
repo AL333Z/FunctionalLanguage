@@ -6,7 +6,7 @@ import com.al333z.type.Type;
 public class NumberNode implements Node{
 	
 	public NumberNode(){
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 	}
 	
 	@Override

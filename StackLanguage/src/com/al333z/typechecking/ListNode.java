@@ -11,7 +11,7 @@ public class ListNode implements Node {
 	protected boolean isEmpty;
 	
 	public ListNode(Node headChecker, Node tailListCheker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		
 		if (headChecker == null && tailListCheker == null) {
 			this.isEmpty = true;

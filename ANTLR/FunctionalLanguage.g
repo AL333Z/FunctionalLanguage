@@ -14,14 +14,22 @@ import com.al333z.type.*;
 private int staticData = 0;
 private int labelCounter = 0;
 private int parameterCounter = 0;
+
+// Symbol Table
 private HashMap symTable = new HashMap();
-private HashMap typeTable = new HashMap();
 private HashMap localSymTable = new HashMap();
+
+// Type Table
+private HashMap typeTable = new HashMap();
 private HashMap localTypeTable = new HashMap();
 
-private HashMap functionParametersTypeTable = new HashMap();
+// Table to keep track of Function Return Values
 private HashMap functionReturnValues = new HashMap();
 
+// Table to keep track of Function Parameter Types
+private HashMap functionParametersTypeTable = new HashMap();
+
+// Run-time variables
 private LinkedList<LinkedList<Node>> funcParametersTypeListOfList = new LinkedList<LinkedList<Node>>();
 private LinkedList<Type> parametersTypeList = new LinkedList<Type>();
 
@@ -49,17 +57,19 @@ prog	returns [String code,  Node node]
 	 } )* 	{ $code+="\thalt\n"+functionCode;}
  	;
  	
-type returns [Type typevalue]
+type	 returns [Type typevalue]
 	: p=primitiveType { $typevalue = $p.typevalue; }
 	| c=compoundType {$typevalue = $c.typevalue; }
 	;
 
 primitiveType returns[Type typevalue]
+	// Symply return Type objs
 	: INT		{$typevalue = new IntType(); }
 	| BOOL 	{$typevalue = new BoolType(); }
 	;
 
 compoundType returns [Type typevalue]
+	// return Type obj with a contained type
 	: (LISTOF LSPAR t=primitiveType RSPAR) {$typevalue = new ListType($t.typevalue); }
 	;
 	  
@@ -67,37 +77,53 @@ command	returns [String code, Node node]
 	: DEF t=type i=ID
           	( ASS e=expr 
           	{
+          	// Save value and type of the Expr
             symTable.put($i.text,new Integer(staticData));
             typeTable.put($i.text, $t.typevalue);
+            
             $code = $e.code+"\tpush "+(staticData++)+"\n"+"\tsw\n";
+            
+          	// Assigment operation check
             $node = new ExprAssignmentNode($t.typevalue , $e.node);
             }
             
            	|LPAR ( 
            	{
-           	// save func return values
+           	// Function definition
+           	
+           	// Save func return values
            	functionReturnValues.put($i.text, $t.typevalue);
            	}
            	
            	t=type
             j=ID 
             {
+            
+            // Save local Sym pos
             localSymTable.put($j.text,new Integer(parameterCounter++));
+            
+            // Save local arg Type
             localTypeTable.put($j.text,$t.typevalue);
             
-            //  save first param type
+            //  Save first param type
        	parametersTypeList.add($t.typevalue);           
+       	
             }
             (COMMA t=type k=ID
             {
+            
+            // Iterate for each arguments..
             localSymTable.put($k.text,new Integer(parameterCounter++));
             localTypeTable.put($k.text, $t.typevalue);
        	parametersTypeList.add($t.typevalue);
+       	
             } 
             )* )? RPAR
             {
-            	// save parameters type list
-            	functionParametersTypeTable.put($i.text, parametersTypeList);            	
+            	// Save parameters type list
+            	functionParametersTypeTable.put($i.text, parametersTypeList);           
+            	
+            	// Clean var.. 	
             	parametersTypeList = new LinkedList<Type>();
             }
              ASS e=expr
@@ -118,10 +144,14 @@ command	returns [String code, Node node]
                             "\tjra\n";
        	$code="";
             parameterCounter=0;
-            localSymTable=new HashMap();
             
+            // Clean vars..
+            localSymTable=new HashMap();
             localTypeTable = new HashMap();
+            
+            // Check Expr body
             $node = new ExprNode($e.node);
+            
          	} 
           	) 
         	| PRINT e=expr 
@@ -194,10 +224,13 @@ term  	returns [String code, Node node]
 	;
 
 factor 	returns [String code, Node node]
+	// Basic factors
  	: n=NUMBER {$code = "\tpush "+$n.text+"\n"; $node = new NumberNode(); }
  	| TRUE {$code = "\tpush "+TRUEVALUE+"\n"; $node = new BoolNode(); }
  	| FALSE {$code = "\tpush "+FALSEVALUE+"\n"; $node = new BoolNode(); }
  	| EMPTY {$code = "\tpush "+EMPTYVALUE+"\n"; $node = new ListNode(null, null);  }
+ 	
+ 	// (Not-so basic) factors
  	| NOT e=expr
  	{
  	$code = $e.code+
@@ -232,6 +265,8 @@ factor 	returns [String code, Node node]
         	| i=ID 
           	( 
           	{
+          	
+          	// Retrieve id value from localSymTable, or from symTable
           	Integer value = (Integer)localSymTable.get($i.text);
             if (value == null) {
          	$code = "\tpush "+
@@ -244,6 +279,7 @@ factor 	returns [String code, Node node]
                         "\tlw\n";
        	}
        	
+       	// Retrieve id value from localTypeTable, or from typeTable
        	Type localTypeValue = (Type)localTypeTable.get($i.text);
             if (localTypeValue == null) {
             	Type typeValue = (Type)typeTable.get($i.text);
@@ -260,11 +296,15 @@ factor 	returns [String code, Node node]
           	| LPAR 
           	{
           	$code = "";
+          	
+          	// Func call
           	LinkedList<Node> funcParametersTypeList = new LinkedList<Node>();   	
           	}
           	  (e=expr 
           	  {
           	  $code = $e.code;
+          	  
+          	  // Save arguments expr
           	  funcParametersTypeList.add(new ExprNode($e.node));
           	  }
        	  (COMMA f=expr 
@@ -278,12 +318,18 @@ factor 	returns [String code, Node node]
               
               $code = "\tlfp\n"+$code+"\tjal "+$i.text+"\n";
               
+              // Retrieve declared arguments in func declaration, from functionParametersTypeTable
               LinkedList<Type> declaredParametersTypeList = (LinkedList<Type>) functionParametersTypeTable.get($i.text);
+              // Retrieve declared func return Type
               Type returnType =((Type)functionReturnValues.get($i.text));
+              
+              // Using a list of list of arguments, to support nested func call
               funcParametersTypeListOfList.add(funcParametersTypeList);
+              
+              // Perform func invocation typecheck
               $node = new FuncNode( returnType, funcParametersTypeList, declaredParametersTypeList);
               
-              // empty
+              // Clean..
               funcParametersTypeListOfList.removeLastOccurrence(funcParametersTypeList);
               }
           	)                

@@ -8,7 +8,7 @@ public class TermNode implements Node {
 	protected Node termChecker;
 	
 	public TermNode(Node termChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.termChecker = termChecker;
 	}
 	

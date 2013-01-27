@@ -10,7 +10,7 @@ public class ProgramNode implements Node {
 	protected Node rightCommandChecker;
 	
 	public ProgramNode(Node leftCommandChecker, Node rightCommandChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.leftCommandChecker = leftCommandChecker;
 		this.rightCommandChecker = rightCommandChecker;
 	}

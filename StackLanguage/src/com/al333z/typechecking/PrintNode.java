@@ -9,7 +9,7 @@ public class PrintNode implements Node {
 	protected Node exprChecker;
 	
 	public PrintNode(Node exprChecker) {
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.exprChecker = exprChecker;
 	}
 	

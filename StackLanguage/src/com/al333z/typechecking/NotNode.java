@@ -9,7 +9,7 @@ public class NotNode implements Node {
 	protected Node exprChecker;
 	
 	public NotNode(Node exprChecker){
-		System.out.println(this.getClass().toString()+" object created created.");
+		System.out.println(this.getClass().toString()+" object created.");
 		this.exprChecker = exprChecker;
 	}
 	
