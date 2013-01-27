@@ -96,3 +96,14 @@ that is then executed by a pseudo-virtualmachine. The language generated is desc
 	print
 
 ...
+
+
+**Type Checking**
+
+The type checking has been succesfully implemented, following these steps:
+
+1. Build the AST
+2. Create and populate a Symbol Table, that stores information about types of each node/leaf.
+3. Use the information stored during the top-down process of syntax-directed translation to perform type checks.
+
+
