@@ -57,7 +57,7 @@ that is then executed by a pseudo-virtualmachine. The language generated is desc
 **Sample generated pseudo-machine code**
 
 
-  lfp
+  	lfp
 	push -1
 	push 3
 	lhp
@@ -95,7 +95,7 @@ that is then executed by a pseudo-virtualmachine. The language generated is desc
 	add
 	print
 
-...
+	...
 
 
 **Type Checking**
