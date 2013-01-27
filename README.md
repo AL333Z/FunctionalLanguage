@@ -10,49 +10,49 @@ that is then executed by a pseudo-virtualmachine. The language generated is desc
 
 **Sample functional language syntax**
 
-ef INT sommatutti( LIST-OF[INT] l) = 
- if (l==empty) then 0
-               else (l.first)+sommatutti( (l.rest) );  
-
-print sommatutti([5,[3,empty]]);
-print (5-3+2+3);
-
-/*
- *  Simple var assignment and print
- */
-def INT num = 10;
-def BOOL state = true;
-print num;
-print state;
-
-/*
- * Fn INT -> INT
- */
-def INT double(INT number) =
-if (number == 0) then 0 else number+number;
+	def INT sommatutti( LIST-OF[INT] l) = 
+	 if (l==empty) then 0
+	               else (l.first)+sommatutti( (l.rest) );  
 	
-def INT test0 = double(0);
-def INT test1 = double(1);
-print test0;
-print test1;
-
-/*
- * Fn INT -> BOOL
- */
-def BOOL isZero(INT number) =
-if (number == 0) then true else false;
-
-def BOOL prova0 = isZero(0);
-print prova0;
-
-def BOOL prova1 = isZero(1);
-print prova1;
-
-/*
- * Fn INT, BOOL -> BOOL
- */
-def INT testFn(INT num, BOOL cond) =
-if(cond == true) then num else 0;
+	print sommatutti([5,[3,empty]]);
+	print (5-3+2+3);
+	
+	/*
+	 *  Simple var assignment and print
+	 */
+	def INT num = 10;
+	def BOOL state = true;
+	print num;
+	print state;
+	
+	/*
+	 * Fn INT -> INT
+	 */
+	def INT double(INT number) =
+	if (number == 0) then 0 else number+number;
+		
+	def INT test0 = double(0);
+	def INT test1 = double(1);
+	print test0;
+	print test1;
+	
+	/*
+	 * Fn INT -> BOOL
+	 */
+	def BOOL isZero(INT number) =
+	if (number == 0) then true else false;
+	
+	def BOOL prova0 = isZero(0);
+	print prova0;
+	
+	def BOOL prova1 = isZero(1);
+	print prova1;
+	
+	/*
+	 * Fn INT, BOOL -> BOOL
+	 */
+	def INT testFn(INT num, BOOL cond) =
+	if(cond == true) then num else 0;
 
 **Sample generated pseudo-machine code**
 
