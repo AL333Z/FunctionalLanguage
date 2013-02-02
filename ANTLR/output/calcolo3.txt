@@ -1,0 +1,64 @@
+/*
+ * Type Mismatch BOOL - INT
+ */
+/*
+def INT sommatoria( INT n ) =
+  if (n == 0) then 0
+  else n+sommatoria(n-1);
+
+def BOOL typeMismatch = sommatoria(5);
+*/
+
+
+/*
+ * Type Mismatch INT - BOOL
+ */
+/*
+def INT typeMismatch = TRUE;
+ */
+ 
+/*
+ * Type Mismatch INT - LIST-OF[INT]
+ */
+/*
+def INT typeMismatch = [5,[3, empty]];
+*/
+ 
+ 
+/*
+ * Type Mismatch f(INT) - f(BOOL)
+ */
+
+/*
+def INT sommatoria( INT n ) =
+  if (n == 0) then 0
+  else n+sommatoria(n-1);
+ 
+def BOOL typeMismatch = sommatoria(true);
+*/
+ 
+/*
+ * Wrong func call param number
+ */ 
+
+/*
+def INT sommatoria( INT n ) =
+  if (n == 0) then 0
+  else n+sommatoria(n-1);
+ 
+def INT wrongParams = sommatoria(1,3);
+*/
+
+/*
+ * Wrong func call param type
+ */ 
+
+/*
+def INT sommatoria( INT n, BOOL b ) =
+  if (n == 0) then 0
+  else n+sommatoria(n-1);
+ 
+def INT wrongParams = sommatoria(true, 3);
+*/
+ 
+     

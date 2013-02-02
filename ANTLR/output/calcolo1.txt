@@ -42,7 +42,7 @@ def BOOL prova1 = isZero(1);
 print prova1;
 
 /*
- * Fn INT, BOOL -> BOOL
+ * Fn INT, BOOL -> INT
  */
 def INT testFn(INT num, BOOL cond) =
 if(cond == true) then num else 0;

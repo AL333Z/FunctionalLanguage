@@ -70,5 +70,10 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/ANTLR/output/calcolo2.txt</locationURI>
 		</link>
+		<link>
+			<name>src/calcolo3.txt</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/ANTLR/output/calcolo3.txt</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
