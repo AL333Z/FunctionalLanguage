@@ -12,7 +12,7 @@ public class FuncNode implements Node {
 	protected LinkedList<Type> declaredParametersType;
 	
 	public FuncNode(Type returnType, LinkedList<Node> parametersType, LinkedList<Type> declaredParametersType) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.returnType = returnType;
 		this.parametersType = parametersType;
 		this.declaredParametersType = declaredParametersType;
@@ -41,5 +41,9 @@ public class FuncNode implements Node {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Func";
+	}
 }

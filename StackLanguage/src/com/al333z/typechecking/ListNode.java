@@ -11,7 +11,7 @@ public class ListNode implements Node {
 	protected boolean isEmpty;
 	
 	public ListNode(Node headChecker, Node tailListCheker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		
 		if (headChecker == null && tailListCheker == null) {
 			this.isEmpty = true;
@@ -59,5 +59,9 @@ public class ListNode implements Node {
 	public boolean isListType() {
 		return true;
 	}
-
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "List";
+	}
 }

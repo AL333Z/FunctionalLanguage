@@ -10,7 +10,7 @@ public class ExprAssignmentNode implements Node {
 	protected Node exprChecker;
 	
 	public ExprAssignmentNode(Type type, Node exprChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.type = type;
 		this.exprChecker = exprChecker;
 	}
@@ -31,4 +31,9 @@ public class ExprAssignmentNode implements Node {
 		return false;
 	}
 	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Expr Assignment" +
+				this.exprChecker.toTreeString(ident +"  ");
+	}
 }

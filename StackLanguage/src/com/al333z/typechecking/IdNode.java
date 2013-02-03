@@ -8,7 +8,7 @@ public class IdNode implements Node {
 	protected Type idType;
 	
 	public IdNode(Type typeValue) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.idType = typeValue;
 	}
 	
@@ -20,5 +20,10 @@ public class IdNode implements Node {
 	public boolean isListType(){
 		boolean ret = Type.typeEquals(this.idType, new ListType(null));
 		return ret;
+	}
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Id" + this.idType;
 	}
 }

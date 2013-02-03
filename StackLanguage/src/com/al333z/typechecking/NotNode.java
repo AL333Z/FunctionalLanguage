@@ -9,7 +9,7 @@ public class NotNode implements Node {
 	protected Node exprChecker;
 	
 	public NotNode(Node exprChecker){
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.exprChecker = exprChecker;
 	}
 	
@@ -28,4 +28,9 @@ public class NotNode implements Node {
 		return false;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Not" +
+				this.exprChecker.toTreeString(ident +"  ");
+	}
 }

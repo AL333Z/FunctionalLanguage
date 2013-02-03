@@ -14,4 +14,6 @@ public interface Node {
 	
 	public boolean isListType();
 	
+	public String toTreeString(String ident);
+	
 }

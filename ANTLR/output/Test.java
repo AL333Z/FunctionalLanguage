@@ -28,9 +28,11 @@ class Test {
         
         Node progChecker = ret.node;
         Type res = progChecker.check();
-        //System.out.println("Res: "+res);
+        System.out.println("Tree: "+progChecker.toTreeString("  "));
         
         if (!res.isErrorType()) {
+        	System.out.println("Output:");
+        	
         	// Let's run!
         	
             StackVirtualMachineLexer lex2 = new StackVirtualMachineLexer(new ANTLRFileStream(args[0]+".asm"));

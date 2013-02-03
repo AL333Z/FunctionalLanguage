@@ -6,7 +6,7 @@ import com.al333z.type.Type;
 public class BoolNode implements Node {
 
 	public BoolNode() {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 	}
 	
 	@Override
@@ -19,5 +19,9 @@ public class BoolNode implements Node {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Bool Node";
+	}
 }

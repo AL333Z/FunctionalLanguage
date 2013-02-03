@@ -6,7 +6,7 @@ import com.al333z.type.Type;
 public class NumberNode implements Node{
 	
 	public NumberNode(){
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 	}
 	
 	@Override
@@ -18,5 +18,10 @@ public class NumberNode implements Node{
 	public boolean isListType() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Number Node";
 	}
 }

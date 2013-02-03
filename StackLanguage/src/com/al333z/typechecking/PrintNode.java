@@ -9,7 +9,7 @@ public class PrintNode implements Node {
 	protected Node exprChecker;
 	
 	public PrintNode(Node exprChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.exprChecker = exprChecker;
 	}
 	
@@ -28,4 +28,9 @@ public class PrintNode implements Node {
 		return false;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Print" +
+				this.exprChecker.toTreeString(ident +"  ");
+	}
 }

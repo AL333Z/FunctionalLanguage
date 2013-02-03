@@ -9,7 +9,7 @@ public class FirstNode implements Node {
 	protected Node firstChecker;
 	
 	public FirstNode(Node firstChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.firstChecker = firstChecker;
 	}
 	
@@ -25,11 +25,14 @@ public class FirstNode implements Node {
 
 	}
 
-
-
 	@Override
 	public boolean isListType() {
 		return false;
 	}
-
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "First" +
+				this.firstChecker.toTreeString(ident +"  ");
+	}
 }

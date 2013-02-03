@@ -10,7 +10,7 @@ public class AndNode implements Node {
 	protected Node rightFactorChecker;
 	
 	public AndNode(Node leftFactorChecker, Node rightFactorChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.leftFactorChecker = leftFactorChecker;
 		this.rightFactorChecker = rightFactorChecker;
 	}
@@ -30,4 +30,10 @@ public class AndNode implements Node {
 		return false;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "And" +
+				this.leftFactorChecker.toTreeString(ident +"  ")+
+				this.rightFactorChecker.toTreeString(ident +"  ");
+	}
 }

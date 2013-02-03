@@ -12,7 +12,7 @@ public class IfNode implements Node {
 	protected Node elseExprChecker;
 	
 	public IfNode(Node condExprChecker, Node thenExprChecker, Node elseExprChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.condExprChecker = condExprChecker;
 		this.thenExprChecker = thenExprChecker;
 		this.elseExprChecker = elseExprChecker;
@@ -36,4 +36,11 @@ public class IfNode implements Node {
 		return false;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "if-then-else" +
+				this.condExprChecker.toTreeString(ident +"    ")+
+				this.thenExprChecker.toTreeString(ident +"    ")+
+				this.elseExprChecker.toTreeString(ident +"    ");
+	}
 }

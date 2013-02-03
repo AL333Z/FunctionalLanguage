@@ -10,7 +10,7 @@ public class ProgramNode implements Node {
 	protected Node rightCommandChecker;
 	
 	public ProgramNode(Node leftCommandChecker, Node rightCommandChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.leftCommandChecker = leftCommandChecker;
 		this.rightCommandChecker = rightCommandChecker;
 	}
@@ -29,6 +29,12 @@ public class ProgramNode implements Node {
 	public boolean isListType() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String toTreeString(String ident) {
+		return  this.leftCommandChecker.toTreeString("") + 
+				this.rightCommandChecker.toTreeString("");
 	}
 
 }

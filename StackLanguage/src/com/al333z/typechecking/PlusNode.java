@@ -10,7 +10,7 @@ public class PlusNode implements Node {
 	protected Node rightTermChecker;
 	
 	public PlusNode(Node leftTermChecker, Node rightTermChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.leftTermChecker = leftTermChecker;
 		this.rightTermChecker = rightTermChecker;
 	}
@@ -31,4 +31,10 @@ public class PlusNode implements Node {
 		return false;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Plus" +
+				this.leftTermChecker.toTreeString(ident +"  ")+
+				this.rightTermChecker.toTreeString(ident +"  ");
+	}
 }

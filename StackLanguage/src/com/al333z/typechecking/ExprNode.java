@@ -8,7 +8,7 @@ public class ExprNode implements Node {
 	protected Node exprChecker;
 	
 	public ExprNode(Node exprChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.exprChecker = exprChecker;
 	}
 	
@@ -21,5 +21,10 @@ public class ExprNode implements Node {
 		boolean ret = Type.typeEquals(this.exprChecker.check(), new ListType(null));
 		return ret;
 	}
-
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Expr" +
+				this.exprChecker.toTreeString(ident +"  ");
+	}
 }

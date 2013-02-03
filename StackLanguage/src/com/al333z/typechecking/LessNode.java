@@ -11,7 +11,7 @@ public class LessNode implements Node {
 	protected Node rightExprChecker;
 	
 	public LessNode(Node leftExprChecker, Node rightExprChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.leftExprChecker = leftExprChecker;
 		this.rightExprChecker = rightExprChecker;
 	}
@@ -33,4 +33,10 @@ public class LessNode implements Node {
 		return false;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Less" +
+				this.leftExprChecker.toTreeString(ident +"  ")+
+				this.rightExprChecker.toTreeString(ident +"  ");
+	}
 }

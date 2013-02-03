@@ -10,7 +10,7 @@ public class OrNode implements Node {
 	protected Node rightTermChecker;
 	
 	public OrNode(Node leftTermChecker, Node rightTermChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.leftTermChecker = leftTermChecker;
 		this.rightTermChecker = rightTermChecker;
 	}
@@ -30,4 +30,10 @@ public class OrNode implements Node {
 		return false;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Or" +
+				this.leftTermChecker.toTreeString(ident +"  ")+
+				this.rightTermChecker.toTreeString(ident +"  ");
+	}
 }

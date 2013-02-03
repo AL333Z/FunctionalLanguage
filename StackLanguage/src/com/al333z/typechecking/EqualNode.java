@@ -10,7 +10,7 @@ public class EqualNode implements Node {
 	protected Node rightExprChecker;
 	
 	public EqualNode(Node leftExprChecker, Node rightExprChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.leftExprChecker = leftExprChecker;
 		this.rightExprChecker = rightExprChecker;
 	}
@@ -28,5 +28,11 @@ public class EqualNode implements Node {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Equal" +
+				this.leftExprChecker.toTreeString(ident +"  ")+
+				this.rightExprChecker.toTreeString(ident +"  ");
+	}
 }

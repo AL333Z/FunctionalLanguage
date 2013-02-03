@@ -8,7 +8,7 @@ public class TermNode implements Node {
 	protected Node termChecker;
 	
 	public TermNode(Node termChecker) {
-		System.out.println(this.getClass().toString()+" object created.");
+//		System.out.println(this.getClass().toString()+" object created.");
 		this.termChecker = termChecker;
 	}
 	
@@ -22,4 +22,9 @@ public class TermNode implements Node {
 		return ret;
 	}
 
+	@Override
+	public String toTreeString(String ident) {
+		return '\n' + ident + "Term" +
+				this.termChecker.toTreeString(ident +"  ");
+	}
 }
